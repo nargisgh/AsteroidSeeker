@@ -1,41 +1,81 @@
 package ca.cmpt276.as3.mineseeker.model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+/*
+* This is a GameBoard class that stores BoardSquare Objects
+*/
 
-public class GameBoard implements Iterable<BoardSquare>{
-    private List<BoardSquare> boardSquares = new ArrayList<>();
+public class GameBoard {
+
     private static GameBoard instance;
+    private BoardSquare[][] gameBoard;
     private int numBoardRows;
     private int numBoardColumns;
-    private int numBoardElements;
 
     private GameBoard(){
+        gameBoard = new BoardSquare[numBoardRows][numBoardColumns];
     }
 
     public static GameBoard getInstance(){
         if(instance == null){
             instance = new GameBoard();
-            instance.numBoardElements = 0;
         }
         return instance;
     }
-    public void addBoardSquare(BoardSquare square){
-        boardSquares.add(square);
-        numBoardElements++;
+
+    public BoardSquare[][] getGameBoard() {
+        return this.gameBoard;
     }
 
-    @Override
-    public Iterator<BoardSquare> iterator() {
-        return boardSquares.iterator();
+    public void setNumBoardRows(int numBoardRows) {
+        this.numBoardRows = numBoardRows;
     }
 
-    public List<BoardSquare> getBoardSquares() {
-        return boardSquares;
+    public void setNumBoardColumns(int numBoardColumns) {
+        this.numBoardColumns = numBoardColumns;
     }
 
-    public BoardSquare getSpecificBoardSquare(int index){
-        return this.boardSquares.get(index);
+    public BoardSquare getSpecificSquare(int row, int column){
+        return gameBoard[row][column];
+    }
+
+    public void setToMine(int row, int column){
+        BoardSquare newMine = gameBoard[row][column];
+        newMine.changeToMine();
+    }
+
+    public void countMinesNearby(int rows, int cols){
+        int minesNearSquare = 0;
+        BoardSquare currentSquare = gameBoard[rows][cols];
+        for(int i = rows - 1; i < rows + 2; i++){
+            for(int j = cols - 1; j < cols + 2; j++){
+                if(checkForMine(i,j)){
+                    minesNearSquare++;
+                }
+            }
+        }
+        currentSquare.setMinesNearby(minesNearSquare);
+    }
+
+    public boolean checkForMine(int row, int column){
+        if(isBoardSquareInBounds(row, column)){
+            BoardSquare boardSquare = gameBoard[row][column];
+            if(boardSquare.getIsMine()){
+                return true;
+            } else{
+                return false;
+            }
+        } else{
+            return false;
+        }
+    }
+
+    public boolean isBoardSquareInBounds(int row, int column){
+        if(row < 0 || row >= numBoardColumns){
+            return false;
+        }else if (column < 0 || column >= numBoardColumns){
+            return false;
+        }else{
+            return true;
+        }
     }
 }
