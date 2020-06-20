@@ -8,4 +8,7 @@
     <string name="help">Help</string>
     <string name="options">Options</string>
     <string name="play_game">Play Game!</string>
+    <string name="helptxt">HELP!</string>
+    <string name="helpbox">Help! Spot the asteroids before they hit earth and become meteors.</string>
+    <string name="okay">Okay</string>
 </resources>

@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.view.Window;
+
+import ca.cmpt276.as3.mineseeker.ui.WelcomeScreen;
 
 public class MainActivity extends AppCompatActivity {
 

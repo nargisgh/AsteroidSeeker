@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker;
+package ca.cmpt276.as3.mineseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import ca.cmpt276.as3.mineseeker.R;
 
 public class WelcomeScreen extends AppCompatActivity {
     Animation ranimation;
@@ -21,6 +23,7 @@ public class WelcomeScreen extends AppCompatActivity {
         myImage = findViewById(R.id.anim);
         myImage.setImageResource(R.drawable.asteroidfalling);
         rotateAnimation();
+
         skipBtn();
 
     }

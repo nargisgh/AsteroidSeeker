@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker;
+package ca.cmpt276.as3.mineseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import ca.cmpt276.as3.mineseeker.R;
 
 public class Menu extends AppCompatActivity {
     Button btnHelp;
@@ -24,8 +26,8 @@ public class Menu extends AppCompatActivity {
         btnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent =new Intent(Menu.this, HelpMenu.class);
-                //startActivity(intent);
+                Intent intent =new Intent(Menu.this, HelpMenu.class);
+                startActivity(intent);
             }
         });
     }
