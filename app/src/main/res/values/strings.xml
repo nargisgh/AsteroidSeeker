@@ -4,4 +4,8 @@
     <string name="by_shaniel_and_nargis">By: Shaniel and Nargis</string>
     <string name="skip">SKIP</string>
     <string name="asteroidfalling">asteroidfalling</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="help">Help</string>
+    <string name="options">Options</string>
+    <string name="play_game">Play Game!</string>
 </resources>
