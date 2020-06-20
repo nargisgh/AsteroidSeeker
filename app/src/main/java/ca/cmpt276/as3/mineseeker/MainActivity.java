@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myImage = findViewById(R.id.anim);
-        myImage.setImageResource(R.drawable.asteroidfalling);
+        myImage.setImageResource(R.drawable.rocketship);
         rotateAnimation();
 
         skipBtn();
