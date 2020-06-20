@@ -4,6 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/asteroidspace"
     tools:context=".WelcomeScreen">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="196dp"
+        android:layout_marginLeft="196dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="@string/asteroid_seeker"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="344dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="@string/by_shaniel_and_nargis"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/skipbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#5A68B8"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/skip"
+        android:textAllCaps="false"
+        android:textColor="#F8F8F8"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/anim"
+        android:layout_width="282dp"
+        android:layout_height="173dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/asteroidfalling"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.563"
+        app:srcCompat="@drawable/asteroidfalling" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
