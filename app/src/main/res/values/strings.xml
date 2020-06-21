@@ -11,4 +11,11 @@
     <string name="helptxt">HELP!</string>
     <string name="helpbox">Help! Spot the asteroids before they hit earth and become meteors.</string>
     <string name="okay">Okay</string>
+    <string name="helpstring">\nYou\'ve been sent on a mission to detect all the asteroids and warn those on Earth. Find the asteroids before they disperse into meteors. You\'re journey will allow you to gain better decisions in finding the right astronomical path in protecting the world. The smart scans will
+        update your rocket ship in how many asteroids remain vertically and horizontal from your position.\n\n GOOD LUCK!\n Scroll for Citations: \n\n\n  Images: https://www.freepik.com/ and https://depositphotos.com/vector-images/space-ship.html\n
+          Audio: https://freesound.org/people/melissapons/sounds/171588/ \n MediaPlayer citation : https://developer.android.com/guide/topics/media/mediaplayer
+        \n    Rotate: https://www.youtube.com/watch?v=goVoYf2qie0
+        \n   For rounding edges of an image: https://www.youtube.com/watch?v=oeQyEtY6a-M
+        \n   Fade: //https://stackoverflow.com/questions/2597329/how-to-do-a-fadein-of-an-image-on-an-android-activity-screen
+    </string>
 </resources>

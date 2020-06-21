@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView myImage;
     ImageView astImage;
     Button skip;
+    MediaPlayer space;
     private static int SPLASH_TIME = 6000;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myImage = findViewById(R.id.anim);
         myImage.setImageResource(R.drawable.rocketship);
-        final MediaPlayer space = MediaPlayer.create(MainActivity.this, R.raw.sound);
+        space = MediaPlayer.create(MainActivity.this, R.raw.sound);
         space.start();
         fade();
         rotateAnimation();
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(MainActivity.this, Menu.class);
+                space.release();
                 startActivity(intent);
             }
         });
