@@ -11,9 +11,9 @@
         android:id="@+id/foundtxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/alfa_slab_one"
         android:text="Found x number of x Asteroids"
         android:textColor="#FFFFFF"
@@ -26,9 +26,9 @@
         android:id="@+id/scanstxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
         android:fontFamily="@font/alfa_slab_one"
         android:text="# of Scans used: x"
         android:textColor="#FFFFFF"
@@ -41,9 +41,9 @@
         android:id="@+id/timesPlayedtxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/alfa_slab_one"
         android:text="Times Played: x"
         android:textColor="#FFFFFF"
@@ -51,4 +51,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="Times Played: x" />
+
+    <TableLayout
+        android:id="@+id/tableForButtons"
+        android:layout_width="0dp"
+        android:layout_height="306dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.355"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428">
+
+    </TableLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
