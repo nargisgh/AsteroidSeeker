@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myImage = findViewById(R.id.anim);
         myImage.setImageResource(R.drawable.rocketship);
+        final MediaPlayer space = MediaPlayer.create(MainActivity.this, R.raw.sound);
+        space.start();
         fade();
         rotateAnimation();
         skipBtn();
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent =new Intent(MainActivity.this, Menu.class);
+                space.release();
                 startActivity(intent);
 
             }
@@ -68,4 +72,9 @@ public class MainActivity extends AppCompatActivity {
         //For rounding edges of an image:
         // https://www.youtube.com/watch?v=oeQyEtY6a-M
     }
+
+    //Images: https://www.freepik.com/
+    //https://depositphotos.com/vector-images/space-ship.html
+    //Audio: https://freesound.org/people/melissapons/sounds/171588/
+    //MediaPlayer citation : https://developer.android.com/guide/topics/media/mediaplayer
 }
