@@ -32,7 +32,7 @@
         android:fontFamily="sans-serif-condensed-light"
         android:text="@string/by_shaniel_and_nargis"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,9 +54,11 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="250dp"
         android:layout_height="195dp"
-        android:layout_margin="16dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="30dp"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="30dp"
         app:cardElevation="0dp"
@@ -74,6 +76,27 @@
             tools:ignore="ContentDescription" />
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="227dp"
+        android:layout_height="149dp"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/ast"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/asteroidscene"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
