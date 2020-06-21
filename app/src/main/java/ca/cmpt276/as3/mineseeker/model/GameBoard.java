@@ -11,7 +11,17 @@ public class GameBoard {
     private int numBoardRows;
     private int numBoardColumns;
 
-    private GameBoard(){
+    private static int NumPlayed = 0;
+
+    public int getNumPlayed() {
+        return NumPlayed;
+    }
+
+    public void addNumPlayed(){
+        NumPlayed++;
+    }
+
+    public GameBoard(){
         gameBoard = new BoardSquare[numBoardRows][numBoardColumns];
     }
 

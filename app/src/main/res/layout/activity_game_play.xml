@@ -45,7 +45,6 @@
         android:layout_marginRight="56dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/alfa_slab_one"
-        android:text="Times Played: x"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -11,20 +11,49 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ca.cmpt276.as3.mineseeker.R;
+import ca.cmpt276.as3.mineseeker.model.GameBoard;
 
 public class GamePlay extends AppCompatActivity {
     private static final int NUM_ROWS = 4;
     private static final int NUM_COLS = 5;
     Button[][] buttons = new Button[NUM_ROWS][NUM_COLS];
+    private int numOfAsteroids;
+    public static int NumPlayed = 0;
+    TextView timesPlayedtxt;
+    private GameBoard gameboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
+
+        //NumPlayed++;
+        gameboard = new GameBoard();
+        gameboard.addNumPlayed();
         populateButtons();
+        //HideAsteroid();
+        //UpdateScan();
+        NumPlayed();
+
+    }
+
+    private void NumPlayed() {
+        timesPlayedtxt = findViewById(R.id.timesPlayedtxt);
+        timesPlayedtxt.setText("Times Played: "+gameboard.getNumPlayed());
+    }
+
+    private void UpdateScan() {
+        //SCan number of asteroids remaining
+        //Update number of scans used
+    }
+
+    private void HideAsteroid() {
+        //hide the number of asteroids chosen
+        //update the textview of found = 0/ number of asteroids when start game
     }
 
     private void populateButtons() {
@@ -47,8 +76,6 @@ public class GamePlay extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
-
-                //button.setText("" + col + "," + row);
 
                 // Make text not clip on small buttons
                 button.setPadding(0, 0, 0, 0);
