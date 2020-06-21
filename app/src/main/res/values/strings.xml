@@ -18,4 +18,8 @@
         \n   For rounding edges of an image: https://www.youtube.com/watch?v=oeQyEtY6a-M
         \n   Fade: //https://stackoverflow.com/questions/2597329/how-to-do-a-fadein-of-an-image-on-an-android-activity-screen
     </string>
+    <string name="erase_times_played">Erase times played</string>
+    <string name="settings">SETTINGS</string>
+    <string name="asteroids"># Asteroids</string>
+    <string name="board_size">Board Size</string>
 </resources>

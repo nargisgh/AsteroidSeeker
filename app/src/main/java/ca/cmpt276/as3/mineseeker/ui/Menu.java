@@ -17,8 +17,31 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
         BtnHelp();
+        BtnOptions();
+        BtnGamePlay();
+    }
+
+    private void BtnGamePlay() {
+        btnPlay = findViewById(R.id.btnPlay);
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Menu.this, GamePlay.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void BtnOptions() {
+        btnOptions = findViewById(R.id.btnOptions);
+        btnOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Menu.this, Options.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void BtnHelp() {
