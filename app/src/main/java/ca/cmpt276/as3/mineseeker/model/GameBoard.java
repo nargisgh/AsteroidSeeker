@@ -8,13 +8,11 @@ import java.util.Random;
 
 public class GameBoard {
 
-    private static GameBoard instance;
     private BoardSquare[][] gameBoard;
+    private static GameBoard instance;
     private int numBoardRows;
     private int numBoardColumns;
-    private int numOfMines;
-    private int minesFound;
-    private int minesRemaining;
+    private int numOfAsteroids;
 
     private static int NumPlayed = 0;
 
@@ -50,25 +48,12 @@ public class GameBoard {
         this.numBoardColumns = numBoardColumns;
     }
 
-    public void setNumOfMines(int numOfMines) {
-        this.numOfMines = numOfMines;
+    public void setNumOfAsteroids(int numOfAsteroids) {
+        this.numOfAsteroids = numOfAsteroids;
     }
 
-    public void mineFound(){
-        minesRemaining--;
-        minesFound++;
-    }
-
-    public int getMinesFound(){
-        return this.minesFound;
-    }
-
-    public int getMinesRemaining(){
-        return this.minesRemaining;
-    }
-
-    public int getNumOfMines(){
-        return this.numOfMines;
+    public int getNumOfAsteroids(){
+        return this.numOfAsteroids;
     }
 
     public BoardSquare getSpecificSquare(int row, int column){
@@ -76,7 +61,7 @@ public class GameBoard {
     }
 
     public void distributeMines(){
-        int currentMines = numOfMines;
+        int currentMines = numOfAsteroids;
         for(int currentRow = 0; currentRow < numBoardRows; currentRow++){
             for(int currentColumn = 0; currentColumn < numBoardColumns; currentColumn++){
                 BoardSquare currentSquare = gameBoard[currentRow][currentColumn];

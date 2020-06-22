@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ca.cmpt276.as3.mineseeker.R;
 import ca.cmpt276.as3.mineseeker.model.GameBoard;
@@ -20,20 +19,28 @@ import ca.cmpt276.as3.mineseeker.model.GameBoard;
 public class GamePlay extends AppCompatActivity {
     private static final int NUM_ROWS = 4;
     private static final int NUM_COLS = 5;
+    private static final int SET_VALUE = 20;
     Button[][] buttons = new Button[NUM_ROWS][NUM_COLS];
-    private int numOfAsteroids;
+    private int numOfAsteroids = SET_VALUE;
+    private int asteroidsFound = 0;
+    private int asteroidsLeft = numOfAsteroids;
+    private int numOfScans = 0;
+
     public static int NumPlayed = 0;
     TextView timesPlayedtxt;
     private GameBoard gameboard;
+    private int[][] asteroidChecker = new int[NUM_ROWS][NUM_COLS];
+    private int[][] scanChecker = new int[NUM_ROWS][NUM_COLS];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
 
-        //NumPlayed++;
+        NumPlayed++;
         gameboard = new GameBoard();
         gameboard.addNumPlayed();
+        initializeCheckers();
         populateButtons();
         //HideAsteroid();
         //UpdateScan();
@@ -43,21 +50,50 @@ public class GamePlay extends AppCompatActivity {
 
     private void NumPlayed() {
         timesPlayedtxt = findViewById(R.id.timesPlayedtxt);
-        timesPlayedtxt.setText("Times Played: "+gameboard.getNumPlayed());
+        timesPlayedtxt.setText("Times Played: " + gameboard.getNumPlayed());
     }
 
-    private void UpdateScan() {
-        //SCan number of asteroids remaining
-        //Update number of scans used
-    }
 
     private void HideAsteroid() {
         //hide the number of asteroids chosen
         //update the textview of found = 0/ number of asteroids when start game
     }
 
+    private void updateGameTextViews(int row, int col){
+        if(asteroidChecker[row][col] == 0){
+            incrementFoundText(row, col);
+        }
+        if(scanChecker[row][col] == 0){
+            incrementScansText(row, col);
+        }
+    }
+
+    private void initializeCheckers(){
+        for(int row = 0; row < NUM_ROWS; row++){
+            for (int col = 0; col < NUM_COLS; col++){
+                asteroidChecker[row][col] = 0;
+                scanChecker[row][col] = 0;
+            }
+        }
+    }
+
+    private void incrementFoundText(int row, int col){
+        asteroidsFound++;
+        asteroidsLeft--;
+        TextView asteroidCount = findViewById(R.id.foundtxt);
+        asteroidCount.setText("Found " + asteroidsFound + " Asteroids, " + asteroidsLeft + " Remain");
+        asteroidChecker[row][col] = 1;
+    }
+
+    private void incrementScansText(int row, int col){
+        numOfScans++;
+        TextView scanCount = findViewById(R.id.scanstxt);
+        scanCount.setText("Scans Taken: " + numOfScans);
+        scanChecker[row][col] = 1;
+    }
+
     private void populateButtons() {
-        TableLayout table = (TableLayout) findViewById(R.id.tableForButtons);
+        TableLayout table = findViewById(R.id.tableForButtons);
 
         for (int row = 0; row < NUM_ROWS; row++) {
             TableRow tableRow = new TableRow(this);
@@ -84,6 +120,7 @@ public class GamePlay extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         gridButtonClicked(FINAL_COL, FINAL_ROW);
+                        updateGameTextViews(FINAL_ROW, FINAL_COL);
                     }
                 });
 
