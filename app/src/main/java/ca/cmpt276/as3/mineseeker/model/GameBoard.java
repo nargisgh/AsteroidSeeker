@@ -1,8 +1,10 @@
 package ca.cmpt276.as3.mineseeker.model;
 
 /*
-* This is a GameBoard class that stores BoardSquare Objects
-*/
+ * This is a GameBoard class that stores BoardSquare Objects
+ */
+
+import java.util.Random;
 
 public class GameBoard {
 
@@ -10,8 +12,18 @@ public class GameBoard {
     private BoardSquare[][] gameBoard;
     private int numBoardRows;
     private int numBoardColumns;
+    private int numOfMines;
+    private int minesFound;
+    private int minesRemaining;
 
     private static int NumPlayed = 0;
+
+    public static GameBoard getInstance(){
+        if(instance == null){
+            instance = new GameBoard();
+        }
+        return instance;
+    }
 
     public int getNumPlayed() {
         return NumPlayed;
@@ -25,12 +37,6 @@ public class GameBoard {
         gameBoard = new BoardSquare[numBoardRows][numBoardColumns];
     }
 
-    public static GameBoard getInstance(){
-        if(instance == null){
-            instance = new GameBoard();
-        }
-        return instance;
-    }
 
     public BoardSquare[][] getGameBoard() {
         return this.gameBoard;
@@ -44,48 +50,87 @@ public class GameBoard {
         this.numBoardColumns = numBoardColumns;
     }
 
+    public void setNumOfMines(int numOfMines) {
+        this.numOfMines = numOfMines;
+    }
+
+    public void mineFound(){
+        minesRemaining--;
+        minesFound++;
+    }
+
     public BoardSquare getSpecificSquare(int row, int column){
         return gameBoard[row][column];
     }
 
-    public void setToMine(int row, int column){
-        BoardSquare newMine = gameBoard[row][column];
-        newMine.changeToMine();
-    }
-
-    public void countMinesNearby(int rows, int cols){
-        int minesNearSquare = 0;
-        BoardSquare currentSquare = gameBoard[rows][cols];
-        for(int i = rows - 1; i < rows + 2; i++){
-            for(int j = cols - 1; j < cols + 2; j++){
-                if(checkForMine(i,j)){
-                    minesNearSquare++;
+    public void distributeMines(){
+        int currentMines = numOfMines;
+        for(int currentRow = 0; currentRow < numBoardRows; currentRow++){
+            for(int currentColumn = 0; currentColumn < numBoardColumns; currentColumn++){
+                BoardSquare currentSquare = gameBoard[currentRow][currentColumn];
+                if(generateMines(currentMines)){
+                    currentSquare.setToMine();
+                    currentMines--;
                 }
             }
         }
-        currentSquare.setMinesNearby(minesNearSquare);
     }
 
-    public boolean checkForMine(int row, int column){
-        if(isBoardSquareInBounds(row, column)){
-            BoardSquare boardSquare = gameBoard[row][column];
-            if(boardSquare.getIsMine()){
-                return true;
-            } else{
-                return false;
+    public boolean generateMines(int numOfMines){
+        boolean makeMine = false;
+        int randomNumber = getRandomNumber(812408);
+        if(numOfMines < (numBoardColumns * numBoardRows)/2){
+            if((numOfMines % 4) == 0){
+                makeMine = true;
             }
-        } else{
-            return false;
         }
+        else{
+            if((numOfMines % 2) == 0){
+                makeMine = true;
+            }
+        }
+        return makeMine;
     }
 
-    public boolean isBoardSquareInBounds(int row, int column){
-        if(row < 0 || row >= numBoardColumns){
-            return false;
-        }else if (column < 0 || column >= numBoardColumns){
-            return false;
-        }else{
-            return true;
+    //method retrieved from: https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
+    public int getRandomNumber(int max){
+        Random rand = new Random();
+        return rand.nextInt(max);
+    }
+
+    public int countMines(BoardSquare square){
+        int squareColumn = square.getSquareColumn();
+        int squareRow = square.getSquareRow();
+        int rowMines = countRowMines(square);
+        int columnMines = countColumnMines(square);
+        if(square.getIsMine()){
+            //due to double counting
+            rowMines--;
         }
+        return rowMines + columnMines;
+    }
+
+    private int countColumnMines(BoardSquare square) {
+        int currentColumn = square.getSquareColumn();
+        int countMines = 0;
+        for(int currentRow = 0; currentRow<numBoardRows; currentRow++){
+            BoardSquare currentSquare = getSpecificSquare(currentRow, currentColumn);
+            if(currentSquare.getIsMine()){
+                countMines++;
+            }
+        }
+        return countMines;
+    }
+
+    private int countRowMines(BoardSquare square) {
+        int currentRow = square.getSquareRow();
+        int countMines = 0;
+        for(int currentColumn = 0; currentColumn < numBoardColumns; currentColumn++){
+            BoardSquare currentSquare = getSpecificSquare(currentRow, currentColumn);
+            if(currentSquare.getIsMine()){
+                countMines++;
+            }
+        }
+        return countMines;
     }
 }
