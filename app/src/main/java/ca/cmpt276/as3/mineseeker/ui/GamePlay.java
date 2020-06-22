@@ -38,14 +38,22 @@ public class GamePlay extends AppCompatActivity {
         setContentView(R.layout.activity_game_play);
 
         NumPlayed++;
-        gameboard = new GameBoard();
-        gameboard.addNumPlayed();
+        setUpGameboard();
+        //gameboard = new GameBoard();
+        //gameboard.addNumPlayed();
+        //gameboard.presets();
         initializeCheckers();
         populateButtons();
         //HideAsteroid();
         //UpdateScan();
         NumPlayed();
 
+    }
+
+    private void setUpGameboard(){
+        gameboard = new GameBoard();
+        gameboard.addNumPlayed();
+        gameboard.presets();
     }
 
     private void NumPlayed() {

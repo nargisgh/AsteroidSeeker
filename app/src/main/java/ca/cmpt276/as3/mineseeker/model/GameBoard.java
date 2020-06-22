@@ -8,11 +8,14 @@ import java.util.Random;
 
 public class GameBoard {
 
+    public static final int TEMP_ROW_NUM = 4;
+    public static final int TEMP_COL_NUM = 5;
+    public static final int TEMP_ASTEROID_COUNT = 10;
     private BoardSquare[][] gameBoard;
     private static GameBoard instance;
-    private int numBoardRows;
-    private int numBoardColumns;
-    private int numOfAsteroids;
+    private int numBoardRows = TEMP_ROW_NUM;
+    private int numBoardColumns = TEMP_COL_NUM;
+    private int numOfAsteroids = TEMP_ASTEROID_COUNT;
 
     private static int NumPlayed = 0;
 
@@ -60,33 +63,34 @@ public class GameBoard {
         return gameBoard[row][column];
     }
 
-    public void distributeMines(){
-        int currentMines = numOfAsteroids;
-        for(int currentRow = 0; currentRow < numBoardRows; currentRow++){
-            for(int currentColumn = 0; currentColumn < numBoardColumns; currentColumn++){
-                BoardSquare currentSquare = gameBoard[currentRow][currentColumn];
-                if(generateMines(currentMines)){
-                    currentSquare.setToMine();
-                    currentMines--;
-                }
+    public void presets(){
+        initializeGameBoard();
+        distributeAsteroids();
+        setNearbyAsteroidCount();
+
+    }
+
+    public void initializeGameBoard(){
+        gameBoard = new BoardSquare[numBoardRows][numBoardColumns];
+        for(int row = 0 ; row < numBoardRows; row++){
+            for(int column = 0; column < numBoardColumns; column++){
+                BoardSquare currentSquare = new BoardSquare();
+                gameBoard[row][column] = currentSquare;
             }
         }
     }
 
-    public boolean generateMines(int numOfMines){
-        boolean makeMine = false;
-        int randomNumber = getRandomNumber(812408);
-        if(numOfMines < (numBoardColumns * numBoardRows)/2){
-            if((numOfMines % 4) == 0){
-                makeMine = true;
+    public void distributeAsteroids(){
+        int asteroidsToDistribute = numOfAsteroids;
+        while(asteroidsToDistribute > 0){
+            int randomRow = getRandomNumber(numBoardRows);
+            int randomCol = getRandomNumber(numBoardColumns);
+            BoardSquare randomSquare = gameBoard[randomRow][randomCol];
+            if(!randomSquare.getIsAsteroid()){
+                randomSquare.setAsteroid();
+                asteroidsToDistribute--;
             }
         }
-        else{
-            if((numOfMines % 2) == 0){
-                makeMine = true;
-            }
-        }
-        return makeMine;
     }
 
     //method retrieved from: https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
@@ -95,36 +99,46 @@ public class GameBoard {
         return rand.nextInt(max);
     }
 
-    public int countMines(BoardSquare square){
+    public void setNearbyAsteroidCount(){
+        for(int row = 0; row < numBoardRows; row++){
+            for(int column = 0; column < numBoardColumns; column++){
+                BoardSquare currentSquare = gameBoard[row][column];
+                int asteroidsNearby = countAsteroids(currentSquare);
+                currentSquare.setAsteroidsNearby(asteroidsNearby);
+            }
+        }
+    }
+
+    public int countAsteroids(BoardSquare square){
         int squareColumn = square.getSquareColumn();
         int squareRow = square.getSquareRow();
-        int rowMines = countRowMines(square);
-        int columnMines = countColumnMines(square);
-        if(square.getIsMine()){
+        int rowMines = countRowAsteroids(square);
+        int columnMines = countColumnAsteroids(square);
+        if(square.getIsAsteroid()){
             //due to double counting
             rowMines--;
         }
         return rowMines + columnMines;
     }
 
-    private int countColumnMines(BoardSquare square) {
+    private int countColumnAsteroids(BoardSquare square) {
         int currentColumn = square.getSquareColumn();
         int countMines = 0;
         for(int currentRow = 0; currentRow<numBoardRows; currentRow++){
             BoardSquare currentSquare = getSpecificSquare(currentRow, currentColumn);
-            if(currentSquare.getIsMine()){
+            if(currentSquare.getIsAsteroid()){
                 countMines++;
             }
         }
         return countMines;
     }
 
-    private int countRowMines(BoardSquare square) {
+    private int countRowAsteroids(BoardSquare square) {
         int currentRow = square.getSquareRow();
         int countMines = 0;
         for(int currentColumn = 0; currentColumn < numBoardColumns; currentColumn++){
             BoardSquare currentSquare = getSpecificSquare(currentRow, currentColumn);
-            if(currentSquare.getIsMine()){
+            if(currentSquare.getIsAsteroid()){
                 countMines++;
             }
         }
