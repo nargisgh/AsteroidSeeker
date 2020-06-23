@@ -15,6 +15,13 @@ public class BoardSquare {
         this.asteroidsNearby = 0;
     }
 
+    public BoardSquare(int squareRow, int squareColumn) {
+        this.isAsteroid = false;
+        this.asteroidsNearby = 0;
+        this.squareRow = squareRow;
+        this.squareColumn = squareColumn;
+    }
+
     public int getSquareRow() {
         return squareRow;
     }
@@ -30,7 +37,7 @@ public class BoardSquare {
     public void setSquareColumn(int squareColumn) {
         this.squareColumn = squareColumn;
     }
-    public void setAsteroid(){
+    public void setToAsteroid(){
         this.isAsteroid = true;
     }
 
@@ -46,4 +53,7 @@ public class BoardSquare {
         this.asteroidsNearby = asteroidsNearby;
     }
 
+    public void setAsteroid(boolean isAsteroid) {
+        this.isAsteroid = isAsteroid;
+    }
 }

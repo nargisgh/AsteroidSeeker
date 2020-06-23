@@ -14,6 +14,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import ca.cmpt276.as3.mineseeker.R;
+import ca.cmpt276.as3.mineseeker.model.BoardSquare;
 import ca.cmpt276.as3.mineseeker.model.GameBoard;
 
 public class GamePlay extends AppCompatActivity {
@@ -39,9 +40,6 @@ public class GamePlay extends AppCompatActivity {
 
         NumPlayed++;
         setUpGameboard();
-        //gameboard = new GameBoard();
-        //gameboard.addNumPlayed();
-        //gameboard.presets();
         initializeCheckers();
         populateButtons();
         //HideAsteroid();
@@ -68,7 +66,8 @@ public class GamePlay extends AppCompatActivity {
     }
 
     private void updateGameTextViews(int row, int col){
-        if(asteroidChecker[row][col] == 0){
+        BoardSquare boardSquare = gameboard.getSpecificSquare(row, col);
+        if(asteroidChecker[row][col] == 0 && boardSquare.getIsAsteroid()){
             incrementFoundText(row, col);
         }
         if(scanChecker[row][col] == 0){
@@ -150,16 +149,40 @@ public class GamePlay extends AppCompatActivity {
         // Scale image to button: Only works in JellyBean!
         // Image from Crystal Clear icon set, under LGPL
         // http://commons.wikimedia.org/wiki/Crystal_Clear
+
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
+        changeButtonPicture(button, row, col, newWidth, newHeight);
+
+    }
+
+    public void changeButtonPicture(Button button, int row, int col, int newWidth, int newHeight){
+        if (isAsteroidHidden(row, col)){
+            populateAsteroidButton(button, newWidth, newHeight);
+            showNearbyAsteroids(button, row, col);
+        }
+        else{
+            showNearbyAsteroids(button, row, col);
+        }
+    }
+
+    private boolean isAsteroidHidden(int row, int col){
+        BoardSquare currentSquare = gameboard.getSpecificSquare(row, col);
+        return currentSquare.getIsAsteroid();
+
+    }
+
+    private void populateAsteroidButton(Button button, int newWidth, int newHeight){
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.asteroid);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+    }
 
-        // Change text on button:
-        button.setText("" + col);
-
+    public void showNearbyAsteroids(Button button, int row, int col){
+        BoardSquare currentSquare = gameboard.getSpecificSquare(row, col);
+        int nearbyAsteroids = currentSquare.getAsteroidsNearby();
+        button.setText("" + nearbyAsteroids);
     }
 
     private void lockButtonSizes() {

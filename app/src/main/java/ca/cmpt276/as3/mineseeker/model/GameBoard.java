@@ -10,7 +10,7 @@ public class GameBoard {
 
     public static final int TEMP_ROW_NUM = 4;
     public static final int TEMP_COL_NUM = 5;
-    public static final int TEMP_ASTEROID_COUNT = 10;
+    public static final int TEMP_ASTEROID_COUNT = 7;
     private BoardSquare[][] gameBoard;
     private static GameBoard instance;
     private int numBoardRows = TEMP_ROW_NUM;
@@ -41,6 +41,14 @@ public class GameBoard {
 
     public BoardSquare[][] getGameBoard() {
         return this.gameBoard;
+    }
+
+    public int getNumBoardRows() {
+        return numBoardRows;
+    }
+
+    public int getNumBoardColumns() {
+        return numBoardColumns;
     }
 
     public void setNumBoardRows(int numBoardRows) {
@@ -74,7 +82,7 @@ public class GameBoard {
         gameBoard = new BoardSquare[numBoardRows][numBoardColumns];
         for(int row = 0 ; row < numBoardRows; row++){
             for(int column = 0; column < numBoardColumns; column++){
-                BoardSquare currentSquare = new BoardSquare();
+                BoardSquare currentSquare = new BoardSquare(row, column);
                 gameBoard[row][column] = currentSquare;
             }
         }
@@ -87,7 +95,7 @@ public class GameBoard {
             int randomCol = getRandomNumber(numBoardColumns);
             BoardSquare randomSquare = gameBoard[randomRow][randomCol];
             if(!randomSquare.getIsAsteroid()){
-                randomSquare.setAsteroid();
+                randomSquare.setToAsteroid();
                 asteroidsToDistribute--;
             }
         }
@@ -100,48 +108,79 @@ public class GameBoard {
     }
 
     public void setNearbyAsteroidCount(){
+        BoardSquare currentSquare;
         for(int row = 0; row < numBoardRows; row++){
             for(int column = 0; column < numBoardColumns; column++){
-                BoardSquare currentSquare = gameBoard[row][column];
+                currentSquare = gameBoard[row][column];
                 int asteroidsNearby = countAsteroids(currentSquare);
                 currentSquare.setAsteroidsNearby(asteroidsNearby);
             }
         }
     }
 
-    public int countAsteroids(BoardSquare square){
-        int squareColumn = square.getSquareColumn();
-        int squareRow = square.getSquareRow();
-        int rowMines = countRowAsteroids(square);
-        int columnMines = countColumnAsteroids(square);
-        if(square.getIsAsteroid()){
-            //due to double counting
-            rowMines--;
-        }
-        return rowMines + columnMines;
+    public int countAsteroids(BoardSquare boardSquare){
+        int rowMines = countRowAsteroids(boardSquare);
+        int columnMines = countColumnAsteroids(boardSquare);
+        return (rowMines + columnMines);
     }
 
-    private int countColumnAsteroids(BoardSquare square) {
-        int currentColumn = square.getSquareColumn();
-        int countMines = 0;
-        for(int currentRow = 0; currentRow<numBoardRows; currentRow++){
-            BoardSquare currentSquare = getSpecificSquare(currentRow, currentColumn);
-            if(currentSquare.getIsAsteroid()){
-                countMines++;
+    public int countColumnAsteroids(BoardSquare boardSquare) {
+        int numOfAsteroids = 0;
+        int column = boardSquare.getSquareColumn();
+        for(int row = 0; row < numBoardRows; row++){
+            BoardSquare currentSquare = getSpecificSquare(row, column);
+            if(row != boardSquare.getSquareRow()){
+                if(currentSquare.getIsAsteroid()){
+                    numOfAsteroids++;
+                }
             }
         }
-        return countMines;
+        return numOfAsteroids;
     }
 
-    private int countRowAsteroids(BoardSquare square) {
-        int currentRow = square.getSquareRow();
-        int countMines = 0;
-        for(int currentColumn = 0; currentColumn < numBoardColumns; currentColumn++){
-            BoardSquare currentSquare = getSpecificSquare(currentRow, currentColumn);
-            if(currentSquare.getIsAsteroid()){
-                countMines++;
+    public int countRowAsteroids(BoardSquare boardSquare){
+        int numOfAsteriods = 0;
+        int row = boardSquare.getSquareRow();
+        for(int column = 0; column < numBoardColumns; column++){
+            BoardSquare currentSquare = getSpecificSquare(row, column);
+            if(column != boardSquare.getSquareColumn()){
+                if(currentSquare.getIsAsteroid()){
+                    numOfAsteriods++;
+                }
             }
         }
-        return countMines;
+        return numOfAsteriods;
+    }
+
+    public static void test(){
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.initializeGameBoard();
+        BoardSquare boardSquare = gameBoard.getSpecificSquare(0,0);
+        boardSquare.setToAsteroid();
+        boardSquare = gameBoard.getSpecificSquare(1,1);
+        boardSquare.setToAsteroid();
+        boardSquare = gameBoard.getSpecificSquare(3,1);
+        boardSquare.setToAsteroid();
+        boardSquare = gameBoard.getSpecificSquare(0,2);
+        boardSquare.setToAsteroid();
+        boardSquare = gameBoard.getSpecificSquare(1,3);
+        boardSquare.setToAsteroid();
+        boardSquare = gameBoard.getSpecificSquare(0,4);
+        boardSquare.setToAsteroid();
+        boardSquare = gameBoard.getSpecificSquare(2,4);
+        boardSquare.setToAsteroid();
+        gameBoard.setNearbyAsteroidCount();
+        for(int i = 0; i < gameBoard.getNumBoardRows(); i++){
+            for(int j = 0; j < gameBoard.getNumBoardColumns(); j++){
+                BoardSquare currentSquare = gameBoard.getSpecificSquare(i,j);
+                System.out.print(currentSquare.getAsteroidsNearby());
+            }
+            System.out.println("");
+        }
+    }
+
+
+    public static void main(String args[]){
+        test();
     }
 }
