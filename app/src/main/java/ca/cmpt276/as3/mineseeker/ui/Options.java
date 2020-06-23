@@ -2,6 +2,7 @@ package ca.cmpt276.as3.mineseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
@@ -18,7 +19,7 @@ public class Options extends AppCompatActivity {
     public GameBoard gameBoard;
     Spinner boardDropdown;
     Spinner asteroidDropdown;
-
+    MediaPlayer space;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,8 @@ public class Options extends AppCompatActivity {
         eraseBtn();
         BoardDropdown();
         AsteroidDropdown();
+        space = MediaPlayer.create(Options.this, R.raw.sound);
+        space.start();
         // Spinner citation: https://developer.android.com/guide/topics/ui/controls/spinner
 
 
