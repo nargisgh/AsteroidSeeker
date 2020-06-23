@@ -62,6 +62,18 @@ public class GameBoard {
         minesFound++;
     }
 
+    public int getMinesFound(){
+        return this.minesFound;
+    }
+
+    public int getMinesRemaining(){
+        return this.minesRemaining;
+    }
+
+    public int getNumOfMines(){
+        return this.numOfMines;
+    }
+
     public BoardSquare getSpecificSquare(int row, int column){
         return gameBoard[row][column];
     }
