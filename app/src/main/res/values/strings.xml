@@ -16,7 +16,9 @@
           Audio: https://freesound.org/people/melissapons/sounds/171588/ \n MediaPlayer citation : https://developer.android.com/guide/topics/media/mediaplayer
         \n    Rotate: https://www.youtube.com/watch?v=goVoYf2qie0
         \n   For rounding edges of an image: https://www.youtube.com/watch?v=oeQyEtY6a-M
-        \n   Fade: //https://stackoverflow.com/questions/2597329/how-to-do-a-fadein-of-an-image-on-an-android-activity-screen
+        \n   Fade: https://stackoverflow.com/questions/2597329/how-to-do-a-fadein-of-an-image-on-an-android-activity-screen
+        \n Spinner: https://developer.android.com/guide/topics/ui/controls/spinner
+        \n Scroll Textview: https://www.youtube.com/watch?v=aZPsgEcCkkc
     </string>
     <string name="erase_times_played">Erase times played</string>
     <string name="settings">SETTINGS</string>
