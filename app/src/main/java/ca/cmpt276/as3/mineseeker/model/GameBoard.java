@@ -32,6 +32,9 @@ public class GameBoard {
     public void addNumPlayed(){
         NumPlayed++;
     }
+    public void removeNumPlayed(){
+        NumPlayed = 0;
+    }
 
     public GameBoard(){
         gameBoard = new BoardSquare[numBoardRows][numBoardColumns];

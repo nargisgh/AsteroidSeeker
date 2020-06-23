@@ -24,7 +24,7 @@ public class GamePlay extends AppCompatActivity {
     private int numOfAsteroids;
     public static int NumPlayed = 0;
     TextView timesPlayedtxt;
-    private GameBoard gameboard;
+    public GameBoard gameboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class GamePlay extends AppCompatActivity {
         setContentView(R.layout.activity_game_play);
 
         //NumPlayed++;
-        gameboard = new GameBoard();
+        gameboard = GameBoard.getInstance();
         gameboard.addNumPlayed();
         populateButtons();
         //HideAsteroid();
