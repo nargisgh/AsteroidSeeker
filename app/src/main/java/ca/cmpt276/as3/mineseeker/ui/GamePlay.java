@@ -32,7 +32,6 @@ public class GamePlay extends AppCompatActivity {
     TextView timesPlayedtxt;
     public GameBoard gameboard;
     MediaPlayer space;
-    private GameBoard gameboard;
     private int[][] asteroidChecker = new int[NUM_ROWS][NUM_COLS];
     private int[][] scanChecker = new int[NUM_ROWS][NUM_COLS];
 
