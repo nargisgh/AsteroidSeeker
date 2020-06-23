@@ -22,6 +22,12 @@ public class Menu extends AppCompatActivity {
         BtnGamePlay();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
+
     private void BtnGamePlay() {
         btnPlay = findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
