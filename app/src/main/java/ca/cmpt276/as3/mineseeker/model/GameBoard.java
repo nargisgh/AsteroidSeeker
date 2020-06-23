@@ -151,36 +151,4 @@ public class GameBoard {
         }
         return numOfAsteriods;
     }
-
-    public static void test(){
-        GameBoard gameBoard = new GameBoard();
-        gameBoard.initializeGameBoard();
-        BoardSquare boardSquare = gameBoard.getSpecificSquare(0,0);
-        boardSquare.setToAsteroid();
-        boardSquare = gameBoard.getSpecificSquare(1,1);
-        boardSquare.setToAsteroid();
-        boardSquare = gameBoard.getSpecificSquare(3,1);
-        boardSquare.setToAsteroid();
-        boardSquare = gameBoard.getSpecificSquare(0,2);
-        boardSquare.setToAsteroid();
-        boardSquare = gameBoard.getSpecificSquare(1,3);
-        boardSquare.setToAsteroid();
-        boardSquare = gameBoard.getSpecificSquare(0,4);
-        boardSquare.setToAsteroid();
-        boardSquare = gameBoard.getSpecificSquare(2,4);
-        boardSquare.setToAsteroid();
-        gameBoard.setNearbyAsteroidCount();
-        for(int i = 0; i < gameBoard.getNumBoardRows(); i++){
-            for(int j = 0; j < gameBoard.getNumBoardColumns(); j++){
-                BoardSquare currentSquare = gameBoard.getSpecificSquare(i,j);
-                System.out.print(currentSquare.getAsteroidsNearby());
-            }
-            System.out.println("");
-        }
-    }
-
-
-    public static void main(String args[]){
-        test();
-    }
 }
