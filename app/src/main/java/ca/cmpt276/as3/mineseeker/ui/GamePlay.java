@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,8 @@ public class GamePlay extends AppCompatActivity {
 
     public static int NumPlayed = 0;
     TextView timesPlayedtxt;
+    public GameBoard gameboard;
+    MediaPlayer space;
     private GameBoard gameboard;
     private int[][] asteroidChecker = new int[NUM_ROWS][NUM_COLS];
     private int[][] scanChecker = new int[NUM_ROWS][NUM_COLS];
@@ -37,6 +40,11 @@ public class GamePlay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
+        space = MediaPlayer.create(GamePlay.this, R.raw.sound);
+        space.start();
+        //NumPlayed++;
+        gameboard = GameBoard.getInstance();
+        gameboard.addNumPlayed();
 
         NumPlayed++;
         setUpGameboard();
