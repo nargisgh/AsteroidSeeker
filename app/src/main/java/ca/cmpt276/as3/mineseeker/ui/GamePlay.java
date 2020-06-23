@@ -2,6 +2,8 @@ package ca.cmpt276.as3.mineseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,11 +21,13 @@ import ca.cmpt276.as3.mineseeker.model.BoardSquare;
 import ca.cmpt276.as3.mineseeker.model.GameBoard;
 
 public class GamePlay extends AppCompatActivity {
-    private static final int NUM_ROWS = 4;
-    private static final int NUM_COLS = 5;
-    private static final int SET_VALUE = 20;
+    private static final int NUM_ROWS = GameBoard.TEMP_ROW_NUM;
+    private static final int NUM_COLS = GameBoard.TEMP_COL_NUM;
+    private static final int NUM_ASTEROIDS = GameBoard.TEMP_ASTEROID_COUNT;
+    public static final String UI_GAME_PLAY_ACTIVITY_ASTEROIDS_FOUND = ".ui.GamePlayActivity - asteroidsFound";
+    public static final String UI_GAME_PLAY_ACTIVITY_SCANS_USED = ".ui.GamePlayActivity - scansUsed";
     Button[][] buttons = new Button[NUM_ROWS][NUM_COLS];
-    private int numOfAsteroids = SET_VALUE;
+    private int numOfAsteroids = NUM_ASTEROIDS;
     private int asteroidsFound = 0;
     private int asteroidsLeft = numOfAsteroids;
     private int numOfScans = 0;
@@ -52,7 +56,6 @@ public class GamePlay extends AppCompatActivity {
         //HideAsteroid();
         //UpdateScan();
         NumPlayed();
-
     }
 
     private void setUpGameboard(){
@@ -65,7 +68,6 @@ public class GamePlay extends AppCompatActivity {
         timesPlayedtxt = findViewById(R.id.timesPlayedtxt);
         timesPlayedtxt.setText("Times Played: " + gameboard.getNumPlayed());
     }
-
 
     private void HideAsteroid() {
         //hide the number of asteroids chosen
@@ -135,6 +137,7 @@ public class GamePlay extends AppCompatActivity {
                     public void onClick(View v) {
                         gridButtonClicked(FINAL_COL, FINAL_ROW);
                         updateGameTextViews(FINAL_ROW, FINAL_COL);
+                        gameOver();
                     }
                 });
 
@@ -142,6 +145,21 @@ public class GamePlay extends AppCompatActivity {
                 buttons[row][col] = button;
             }
         }
+    }
+
+    private void gameOver(){
+        if(asteroidsLeft == 0){
+            Intent CongratsScreen = passDataToCongratsScreen(GamePlay.this, asteroidsFound, numOfScans);
+            startActivity(CongratsScreen);
+            finish();
+        }
+    }
+
+    public static Intent passDataToCongratsScreen(Context context, int asteroidsFound, int scansUsed){
+        Intent gameInfo = new Intent(context, CongratsScreen.class);
+        gameInfo.putExtra(UI_GAME_PLAY_ACTIVITY_ASTEROIDS_FOUND, asteroidsFound);
+        gameInfo.putExtra(UI_GAME_PLAY_ACTIVITY_SCANS_USED, scansUsed);
+        return gameInfo;
     }
 
     private void gridButtonClicked(int col, int row) {

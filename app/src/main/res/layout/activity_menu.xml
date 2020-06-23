@@ -8,7 +8,7 @@
     android:background="@drawable/asteroidspace">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/congratsTxtView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="324dp"
