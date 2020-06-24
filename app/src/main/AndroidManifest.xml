@@ -17,7 +17,8 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.CongratsScreen"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme= "@style/AppTheme.Pop"/>
         <activity
             android:name=".ui.GamePlay"
             android:screenOrientation="landscape" />

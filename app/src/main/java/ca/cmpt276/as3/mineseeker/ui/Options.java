@@ -31,6 +31,11 @@ public class Options extends AppCompatActivity {
 
         // Spinner citation: https://developer.android.com/guide/topics/ui/controls/spinner
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        space.release();
+    }
 
     public void setAsteroid(){
         int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);

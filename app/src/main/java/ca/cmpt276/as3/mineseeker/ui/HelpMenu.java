@@ -26,6 +26,11 @@ public class HelpMenu extends AppCompatActivity {
         space.start();
         OkBtn();
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        space.release();
+    }
 
     private void OkBtn() {
         okBtn = findViewById(R.id.okBtn);

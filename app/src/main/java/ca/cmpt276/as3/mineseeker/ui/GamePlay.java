@@ -60,13 +60,19 @@ public class GamePlay extends AppCompatActivity {
         //UpdateScan();
         NumPlayed();
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        space.release();
+    }
 
     private void setUpGamePlay(){
         gameboard.addNumPlayed();
         setUpDependentValues();
+        populateButtons();
         gameboard.presets(findNumOfAsteroids(), getNumRows(), getNumCols());
         refreshFoundTxt();
-        populateButtons();
+        //populateButtons();
         initializeCheckers();
     }
 
@@ -75,18 +81,15 @@ public class GamePlay extends AppCompatActivity {
     }
 
     public int findNumOfAsteroids(){
-        int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
-        return chosenAsteroids;
+        return ChooseAsteroids.getNumAsteroidsToFind(this);
     }
 
     public int getNumRows(){
-        int chosenRows = ChooseBoardSize.getSavedRows(this);
-        return chosenRows;
+        return ChooseBoardSize.getSavedRows(this);
     }
 
     public int getNumCols(){
-        int chosenCols = ChooseBoardSize.getSavedCols(this);
-        return chosenCols;
+        return ChooseBoardSize.getSavedCols(this);
     }
 
     public void setAsteroidsFound(int asteroidsFound) {

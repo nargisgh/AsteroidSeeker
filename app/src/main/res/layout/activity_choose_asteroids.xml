@@ -15,7 +15,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/alfa_slab_one"
-        android:text="Choose the number of Asteroids to Hide"
+        android:text="@string/choose_the_number_of_asteroids_to_hide"
         android:textColor="#FFFFFF"
         android:textSize="29sp"
         app:layout_constraintStart_toStartOf="parent"

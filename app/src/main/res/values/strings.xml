@@ -14,15 +14,25 @@
     <string name="helpstring">\nYou\'ve been sent on a mission to detect all the asteroids and warn those on Earth. Find the asteroids before they disperse into meteors. You\'re journey will allow you to gain better decisions in finding the right astronomical path in protecting the world. The smart scans will
         update your rocket ship in how many asteroids remain vertically and horizontal from your position.\n\n GOOD LUCK!\n Scroll for Citations: \n\n\n  Images: https://www.freepik.com/ and https://depositphotos.com/vector-images/space-ship.html\n
           Audio: https://freesound.org/people/melissapons/sounds/171588/ \n MediaPlayer citation : https://developer.android.com/guide/topics/media/mediaplayer
-        \n    Rotate: https://www.youtube.com/watch?v=goVoYf2qie0
-        \n   For rounding edges of an image: https://www.youtube.com/watch?v=oeQyEtY6a-M
-        \n   Fade: https://stackoverflow.com/questions/2597329/how-to-do-a-fadein-of-an-image-on-an-android-activity-screen
+        \n Rotate: https://www.youtube.com/watch?v=goVoYf2qie0
+        \n For rounding edges of an image: https://www.youtube.com/watch?v=oeQyEtY6a-M
+        \n Fade: https://stackoverflow.com/questions/2597329/how-to-do-a-fadein-of-an-image-on-an-android-activity-screen
         \n Spinner: https://developer.android.com/guide/topics/ui/controls/spinner
         \n Scroll Textview: https://www.youtube.com/watch?v=aZPsgEcCkkc
+        \n PopUp: https://www.youtube.com/watch?v=eX-TdY6bLdg
     </string>
     <string name="erase_times_played">Erase times played</string>
     <string name="settings">SETTINGS</string>
     <string name="asteroids"># Asteroids</string>
     <string name="board_size">Board Size</string>
     <string name="asteroids_tofind">%1$d Asteroids to find</string>
+    <string name="choose_the_number_of_asteroids_to_hide">Choose the number of Asteroids to Hide</string>
+    <string name="choose_the_astroid_seeker_board_size">Choose the Astroid Seeker Board Size</string>
+    <string name="choose_board_size">Choose Board Size</string>
+    <string name="choose_asteroids">Choose Asteroids</string>
+    <string name="asteroids_found_scans_used">Asteroids Found: Scans Used:</string>
+    <string name="we_hope_you_play_again">We hope you play again!</string>
+    <string name="thank_you_for_playing_asteroid_seeker">Thank You For Playing Asteroid Seeker</string>
+    <string name="you_saved_the_earth_congrats">YOU SAVED THE EARTH CONGRATS!</string>
+    <string name="we_hope_you_play_again_enjoy_your_trip_home">We hope you play again, enjoy your trip home!</string>
 </resources>
