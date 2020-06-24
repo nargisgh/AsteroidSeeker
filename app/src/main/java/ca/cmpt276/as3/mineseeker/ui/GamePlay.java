@@ -23,13 +23,16 @@ import ca.cmpt276.as3.mineseeker.model.GameBoard;
 
 public class GamePlay extends AppCompatActivity {
     public GameBoard gameboard = GameBoard.getInstance();
-    private int numOfRows = gameboard.getNumBoardRows();
-    private int numOfCols = gameboard.getNumBoardColumns();
     private int numOfScans = INITIAL_SCAN_COUNT;
     public static final String UI_GAME_PLAY_ACTIVITY_ASTEROIDS_FOUND = ".ui.GamePlayActivity - asteroidsFound";
     public static final String UI_GAME_PLAY_ACTIVITY_SCANS_USED = ".ui.GamePlayActivity - scansUsed";
     public static final int INITIAL_SCAN_COUNT = 0;
-    Button[][] buttons = new Button[numOfRows][numOfCols];
+    private int numOfRows;
+    private int numOfCols;
+    private int numOfAsteroids;
+
+
+    Button[][] buttons;
     private int asteroidsLeft;
     private int asteroidsFound;
 
@@ -37,8 +40,8 @@ public class GamePlay extends AppCompatActivity {
     public static int NumPlayed = 0;
     TextView timesPlayedtxt;
     MediaPlayer space;
-    private int[][] asteroidChecker = new int[numOfRows][numOfCols];
-    private int[][] scanChecker = new int[numOfRows][numOfCols];
+    private int[][] asteroidChecker;
+    private int[][] scanChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,10 @@ public class GamePlay extends AppCompatActivity {
         refreshFoundTxt();
         populateButtons();
         initializeCheckers();
+    }
+
+    public void setNumOfAsteroids(int numOfAsteroids) {
+        this.numOfAsteroids = numOfAsteroids;
     }
 
     public int findNumOfAsteroids(){
@@ -104,8 +111,11 @@ public class GamePlay extends AppCompatActivity {
 
 
     private void setUpDependentValues() {
+        setNumOfRows(getNumRows());
+        setNumOfCols(getNumCols());
+        setNumOfAsteroids(findNumOfAsteroids());
         setAsteroidsFound(INITIAL_SCAN_COUNT);
-        setAsteroidsLeft(gameboard.getNumOfAsteroids());
+        setAsteroidsLeft(findNumOfAsteroids());
         setNumOfScans(INITIAL_SCAN_COUNT);
     }
 
@@ -131,6 +141,8 @@ public class GamePlay extends AppCompatActivity {
     }
 
     private void initializeCheckers(){
+        asteroidChecker = new int[numOfRows][numOfCols];
+        scanChecker = new int[numOfRows][numOfCols];
         for(int row = 0; row < numOfRows; row++){
             for (int col = 0; col < numOfCols; col++){
                 asteroidChecker[row][col] = 0;
@@ -161,9 +173,8 @@ public class GamePlay extends AppCompatActivity {
     }
 
     private void populateButtons() {
+        buttons = new Button[numOfRows][numOfCols];
         TableLayout table = findViewById(R.id.tableForButtons);
-        int numOfRows = gameboard.getNumBoardRows();
-        int numOfCols = gameboard.getNumBoardColumns();
 
         for (int row = 0; row < numOfRows; row++) {
             TableRow tableRow = new TableRow(this);
