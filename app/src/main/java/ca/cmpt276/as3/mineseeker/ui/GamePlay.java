@@ -49,7 +49,7 @@ public class GamePlay extends AppCompatActivity {
         gameboard = GameBoard.getInstance();
         gameboard.addNumPlayed();
 
-        NumPlayed++;
+        //NumPlayed++;
         setUpGameboard();
         initializeCheckers();
         populateButtons();

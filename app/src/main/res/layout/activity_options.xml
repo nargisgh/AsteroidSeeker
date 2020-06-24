@@ -8,54 +8,26 @@
     android:background="@drawable/asteroidspace">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/boardSizeTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginLeft="104dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/settings"
         android:textColor="#FFFFFF"
-        android:textSize="36sp"
+        android:textSize="46sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginLeft="132dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/alfa_slab_one"
-        android:text="@string/board_size"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginLeft="132dp"
-        android:layout_marginTop="52dp"
-        android:fontFamily="@font/alfa_slab_one"
-        android:text="@string/asteroids"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
     <Button
         android:id="@+id/erasebtn"
-        android:layout_width="202dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginLeft="156dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="214dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="460dp"
+        android:layout_marginLeft="460dp"
+        android:layout_marginBottom="32dp"
         android:background="#84CDD6"
         android:fontFamily="sans-serif"
         android:text="@string/erase_times_played"
@@ -65,28 +37,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
-        android:id="@+id/boardOptions"
-        android:layout_width="219dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="324dp"
-        android:layout_marginLeft="324dp"
-        android:layout_marginTop="128dp"
-        android:background="#B298E1"
-        android:spinnerMode="dropdown"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/asteroidOptions"
-        android:layout_width="163dp"
-        android:layout_height="57dp"
-        android:layout_marginEnd="188dp"
-        android:layout_marginRight="188dp"
-        android:layout_marginBottom="144dp"
-        android:background="#B298E1"
-        android:textSize="20sp"
+    <Button
+        android:id="@+id/btnNumAsteroids"
+        android:layout_width="214dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="460dp"
+        android:layout_marginLeft="460dp"
+        android:layout_marginBottom="136dp"
+        android:background="#84CDD6"
+        android:fontFamily="sans-serif"
+        android:text="Choose Asteroids"
+        android:textColor="#3F51B5"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnBoardSize"
+        android:layout_width="214dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="460dp"
+        android:layout_marginLeft="460dp"
+        android:layout_marginBottom="236dp"
+        android:background="#84CDD6"
+        android:fontFamily="sans-serif"
+        android:text="Choose Board Size"
+        android:textColor="#3F51B5"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
