@@ -116,6 +116,11 @@ public class GameBoard {
         return rand.nextInt(max);
     }
 
+    public void changeNearbyAsteroidCount(BoardSquare boardSquare){
+        boardSquare.setAsteroid(false);
+        setNearbyAsteroidCount();
+    }
+
     public void setNearbyAsteroidCount(){
         BoardSquare currentSquare;
         for(int row = 0; row < numBoardRows; row++){

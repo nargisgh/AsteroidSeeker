@@ -127,18 +127,13 @@ public class GamePlay extends AppCompatActivity {
         timesPlayedtxt.setText("Times Played: " + gameboard.getNumPlayed());
     }
 
-    private void HideAsteroid() {
-        //hide the number of asteroids chosen
-        //update the textview of found = 0/ number of asteroids when start game
-    }
-
     private void updateGameTextViews(int row, int col){
         BoardSquare boardSquare = gameboard.getSpecificSquare(row, col);
         if(asteroidChecker[row][col] == 0 && boardSquare.getIsAsteroid()){
             incrementFoundText(row, col);
 
         }
-        if(scanChecker[row][col] == 0){
+        if(scanChecker[row][col] >= 0){
             incrementScansText(row, col);
         }
     }
@@ -165,14 +160,16 @@ public class GamePlay extends AppCompatActivity {
         asteroidsLeft--;
         TextView asteroidCount = findViewById(R.id.foundtxt);
         asteroidCount.setText("Found " + asteroidsFound + " Asteroids, " + asteroidsLeft + " Remain");
-        asteroidChecker[row][col] = 1;
+        asteroidChecker[row][col]++;
     }
 
     private void incrementScansText(int row, int col){
-        numOfScans++;
         TextView scanCount = findViewById(R.id.scanstxt);
+        if(scanChecker[row][col] <= 2){
+            numOfScans++;
+            scanChecker[row][col]++;
+        }
         scanCount.setText("Scans Taken: " + numOfScans);
-        scanChecker[row][col] = 1;
     }
 
     private void populateButtons() {
@@ -203,8 +200,8 @@ public class GamePlay extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gridButtonClicked(FINAL_COL, FINAL_ROW);
                         updateGameTextViews(FINAL_ROW, FINAL_COL);
+                        gridButtonClicked(FINAL_COL, FINAL_ROW);
                         gameOver();
                     }
                 });
@@ -254,10 +251,16 @@ public class GamePlay extends AppCompatActivity {
     public void changeButtonPicture(Button button, int row, int col, int newWidth, int newHeight){
         if (isAsteroidHidden(row, col)){
             populateAsteroidButton(button, newWidth, newHeight);
-            showNearbyAsteroids(button, row, col);
+            if(asteroidChecker[row][col] > 0){
+                BoardSquare boardSquare = gameboard.getSpecificSquare(row, col);
+                gameboard.changeNearbyAsteroidCount(boardSquare);
+                if(scanChecker[row][col] > 0){
+                    showNearbyAsteroids();
+                }
+            }
         }
         else{
-            showNearbyAsteroids(button, row, col);
+            showNearbyAsteroids();
         }
     }
 
@@ -276,10 +279,18 @@ public class GamePlay extends AppCompatActivity {
 
     }
 
-    public void showNearbyAsteroids(Button button, int row, int col){
-        BoardSquare currentSquare = gameboard.getSpecificSquare(row, col);
-        int nearbyAsteroids = currentSquare.getAsteroidsNearby();
-        button.setText("" + nearbyAsteroids);
+    public void showNearbyAsteroids(){
+        for (int row = 0; row < numOfRows; row++){
+            for(int cols = 0; cols < numOfCols; cols++){
+                BoardSquare currentSquare = gameboard.getSpecificSquare(row, cols);
+                int nearbyAsteroids = currentSquare.getAsteroidsNearby();
+                Button button = buttons[row][cols];
+                if(scanChecker[row][cols] > 0){
+                    button.setText("" + nearbyAsteroids);
+                }
+
+            }
+        }
     }
 
     private void lockButtonSizes() {

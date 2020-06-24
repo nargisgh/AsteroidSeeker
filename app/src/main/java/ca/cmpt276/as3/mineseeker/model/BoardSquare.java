@@ -6,6 +6,7 @@ package ca.cmpt276.as3.mineseeker.model;
 
 public class BoardSquare {
     private boolean isAsteroid;
+    private boolean isFound;
     private int asteroidsNearby;
     private int squareRow;
     private int squareColumn;
@@ -17,6 +18,7 @@ public class BoardSquare {
 
     public BoardSquare(int squareRow, int squareColumn) {
         this.isAsteroid = false;
+        this.isFound = false;
         this.asteroidsNearby = 0;
         this.squareRow = squareRow;
         this.squareColumn = squareColumn;
