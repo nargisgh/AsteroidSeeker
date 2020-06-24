@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
-        android:layout_marginTop="344dp"
+        android:layout_marginTop="328dp"
         android:fontFamily="sans-serif-condensed-light"
         android:text="@string/by_shaniel_and_nargis"
         android:textColor="#FFFFFF"
