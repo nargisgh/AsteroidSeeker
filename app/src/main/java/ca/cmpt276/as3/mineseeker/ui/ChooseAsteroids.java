@@ -66,8 +66,6 @@ public class ChooseAsteroids extends AppCompatActivity {
                 numAsteroidsButton.setChecked(true);
             }
 
-
-            Toast.makeText(ChooseAsteroids.this, "Num of Asteroids is: ", Toast.LENGTH_SHORT).show();
         }
     }
 

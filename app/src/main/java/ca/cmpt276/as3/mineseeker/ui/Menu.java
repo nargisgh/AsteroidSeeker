@@ -32,7 +32,6 @@ public class Menu extends AppCompatActivity {
     public void setAsteroid(){
         int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
         gameBoard.setNumOfAsteroids(chosenAsteroids);
-        Toast.makeText(Menu.this, "Num of Asteroids is: " + gameBoard.getNumOfAsteroids(), Toast.LENGTH_SHORT).show();
     }
 
     public void setDimensions(){

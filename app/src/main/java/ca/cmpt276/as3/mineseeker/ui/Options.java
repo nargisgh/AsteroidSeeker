@@ -35,7 +35,8 @@ public class Options extends AppCompatActivity {
     public void setAsteroid(){
         int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
         gameBoard.setNumOfAsteroids(chosenAsteroids);
-        Toast.makeText(Options.this, "Num of Asteroids is: " + gameBoard.getNumOfAsteroids(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(Options.this, "Num of rows is: " + gameBoard.getNumBoardRows() +
+                " Num of Cols is: " + gameBoard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
     }
 
     private void chooseAsteroidsBtn(){

@@ -63,8 +63,8 @@ public class GamePlay extends AppCompatActivity {
         setUpDependentValues();
         gameboard.presets(findNumOfAsteroids(), getNumRows(), getNumCols());
         refreshFoundTxt();
-        initializeCheckers();
         populateButtons();
+        initializeCheckers();
     }
 
     public int findNumOfAsteroids(){
@@ -162,6 +162,8 @@ public class GamePlay extends AppCompatActivity {
 
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
+        int numOfRows = gameboard.getNumBoardRows();
+        int numOfCols = gameboard.getNumBoardColumns();
 
         for (int row = 0; row < numOfRows; row++) {
             TableRow tableRow = new TableRow(this);
@@ -197,7 +199,8 @@ public class GamePlay extends AppCompatActivity {
                 buttons[row][col] = button;
             }
         }
-        Toast.makeText(GamePlay.this, "Num of Asteroids is: " + gameboard.getNumOfAsteroids(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(GamePlay.this, "Num of rows is: " + gameboard.getNumBoardRows() +
+                " Num of Cols is: " + gameboard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
     }
 
     private void gameOver(){

@@ -13,18 +13,22 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import ca.cmpt276.as3.mineseeker.R;
+import ca.cmpt276.as3.mineseeker.model.GameBoard;
 
 public class ChooseBoardSize extends AppCompatActivity {
 
     public static final String PREFERENCES = "App Preferences";
     public static final String CHOSEN_NUMBER_OF_ROWS = "chosen number of Rows";
     public static final String CHOSEN_NUMBER_OF_COLS = "chosen number of Cols";
+    public GameBoard gameBoard = GameBoard.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_board_size);
         createBoardSizeRadioBtns();
+        Toast.makeText(ChooseBoardSize.this, "Num of rows is: " + gameBoard.getNumBoardRows() +
+                " Num of Cols is: " + gameBoard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
     }
 
     public static Intent makeIntent(Context context) {
@@ -66,8 +70,6 @@ public class ChooseBoardSize extends AppCompatActivity {
             if(isSelectedRow && isSelectedColumn){
                 boardSizeBtn.setChecked(true);
             }
-
-            Toast.makeText(ChooseBoardSize.this, "Num of Asteroids is: ", Toast.LENGTH_SHORT);
         }
     }
 
