@@ -9,8 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.GamePlay"
-            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".ui.ChooseBoardSize"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.ChooseAsteroids"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.CongratsScreen"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.GamePlay"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ui.Options"
             android:screenOrientation="landscape" />

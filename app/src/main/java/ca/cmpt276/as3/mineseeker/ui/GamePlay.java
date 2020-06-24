@@ -2,6 +2,8 @@ package ca.cmpt276.as3.mineseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,17 +18,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ca.cmpt276.as3.mineseeker.R;
+import ca.cmpt276.as3.mineseeker.model.BoardSquare;
 import ca.cmpt276.as3.mineseeker.model.GameBoard;
 
 public class GamePlay extends AppCompatActivity {
-    private static final int NUM_ROWS = 4;
-    private static final int NUM_COLS = 5;
-    Button[][] buttons = new Button[NUM_ROWS][NUM_COLS];
-    private int numOfAsteroids;
+    public GameBoard gameboard = GameBoard.getInstance();
+    private int numOfRows = gameboard.getNumBoardRows();
+    private int numOfCols = gameboard.getNumBoardColumns();
+    private int numOfScans = INITIAL_SCAN_COUNT;
+    public static final String UI_GAME_PLAY_ACTIVITY_ASTEROIDS_FOUND = ".ui.GamePlayActivity - asteroidsFound";
+    public static final String UI_GAME_PLAY_ACTIVITY_SCANS_USED = ".ui.GamePlayActivity - scansUsed";
+    public static final int INITIAL_SCAN_COUNT = 0;
+    Button[][] buttons = new Button[numOfRows][numOfCols];
+    private int asteroidsLeft;
+    private int asteroidsFound;
+
+
     public static int NumPlayed = 0;
     TextView timesPlayedtxt;
-    public GameBoard gameboard;
     MediaPlayer space;
+    private int[][] asteroidChecker = new int[numOfRows][numOfCols];
+    private int[][] scanChecker = new int[numOfRows][numOfCols];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +47,71 @@ public class GamePlay extends AppCompatActivity {
         space = MediaPlayer.create(GamePlay.this, R.raw.sound);
         space.start();
         //NumPlayed++;
-        gameboard = GameBoard.getInstance();
-        gameboard.addNumPlayed();
-        populateButtons();
+        setUpGamePlay();
+        Toast.makeText(GamePlay.this, "Num of rows is: " + gameboard.getNumBoardRows() +
+                " Num of Cols is: " + gameboard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
+
+        //NumPlayed++;
+
         //HideAsteroid();
         //UpdateScan();
         NumPlayed();
+    }
 
+    private void setUpGamePlay(){
+        gameboard.addNumPlayed();
+        setUpDependentValues();
+        gameboard.presets(findNumOfAsteroids(), getNumRows(), getNumCols());
+        refreshFoundTxt();
+        populateButtons();
+        initializeCheckers();
+    }
+
+    public int findNumOfAsteroids(){
+        int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
+        return chosenAsteroids;
+    }
+
+    public int getNumRows(){
+        int chosenRows = ChooseBoardSize.getSavedRows(this);
+        return chosenRows;
+    }
+
+    public int getNumCols(){
+        int chosenCols = ChooseBoardSize.getSavedCols(this);
+        return chosenCols;
+    }
+
+    public void setAsteroidsFound(int asteroidsFound) {
+        this.asteroidsFound = asteroidsFound;
+    }
+
+    public void setNumOfRows(int numOfRows) {
+        this.numOfRows = numOfRows;
+    }
+
+    public void setNumOfCols(int numOfCols) {
+        this.numOfCols = numOfCols;
+    }
+
+    public void setAsteroidsLeft(int asteroidsLeft) {
+        this.asteroidsLeft = asteroidsLeft;
+    }
+
+    public void setNumOfScans(int numOfScans) {
+        this.numOfScans = numOfScans;
+    }
+
+
+    private void setUpDependentValues() {
+        setAsteroidsFound(INITIAL_SCAN_COUNT);
+        setAsteroidsLeft(gameboard.getNumOfAsteroids());
+        setNumOfScans(INITIAL_SCAN_COUNT);
     }
 
     private void NumPlayed() {
         timesPlayedtxt = findViewById(R.id.timesPlayedtxt);
-        timesPlayedtxt.setText("Times Played: "+gameboard.getNumPlayed());
-    }
-
-    private void UpdateScan() {
-        //SCan number of asteroids remaining
-        //Update number of scans used
+        timesPlayedtxt.setText("Times Played: " + gameboard.getNumPlayed());
     }
 
     private void HideAsteroid() {
@@ -59,10 +119,53 @@ public class GamePlay extends AppCompatActivity {
         //update the textview of found = 0/ number of asteroids when start game
     }
 
-    private void populateButtons() {
-        TableLayout table = (TableLayout) findViewById(R.id.tableForButtons);
+    private void updateGameTextViews(int row, int col){
+        BoardSquare boardSquare = gameboard.getSpecificSquare(row, col);
+        if(asteroidChecker[row][col] == 0 && boardSquare.getIsAsteroid()){
+            incrementFoundText(row, col);
 
-        for (int row = 0; row < NUM_ROWS; row++) {
+        }
+        if(scanChecker[row][col] == 0){
+            incrementScansText(row, col);
+        }
+    }
+
+    private void initializeCheckers(){
+        for(int row = 0; row < numOfRows; row++){
+            for (int col = 0; col < numOfCols; col++){
+                asteroidChecker[row][col] = 0;
+                scanChecker[row][col] = 0;
+            }
+        }
+    }
+
+    private void refreshFoundTxt(){
+        TextView asteroidCount = findViewById(R.id.foundtxt);
+        //int numAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
+        asteroidCount.setText("Found " + asteroidsFound + " Asteroids, " + asteroidsLeft + " Remain");
+    }
+
+    private void incrementFoundText(int row, int col){
+        asteroidsFound++;
+        asteroidsLeft--;
+        TextView asteroidCount = findViewById(R.id.foundtxt);
+        asteroidCount.setText("Found " + asteroidsFound + " Asteroids, " + asteroidsLeft + " Remain");
+        asteroidChecker[row][col] = 1;
+    }
+
+    private void incrementScansText(int row, int col){
+        numOfScans++;
+        TextView scanCount = findViewById(R.id.scanstxt);
+        scanCount.setText("Scans Taken: " + numOfScans);
+        scanChecker[row][col] = 1;
+    }
+
+    private void populateButtons() {
+        TableLayout table = findViewById(R.id.tableForButtons);
+        int numOfRows = gameboard.getNumBoardRows();
+        int numOfCols = gameboard.getNumBoardColumns();
+
+        for (int row = 0; row < numOfRows; row++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -70,7 +173,7 @@ public class GamePlay extends AppCompatActivity {
                     1.0f));
             table.addView(tableRow);
 
-            for (int col = 0; col < NUM_COLS; col++){
+            for (int col = 0; col < numOfCols; col++){
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
@@ -87,6 +190,8 @@ public class GamePlay extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         gridButtonClicked(FINAL_COL, FINAL_ROW);
+                        updateGameTextViews(FINAL_ROW, FINAL_COL);
+                        gameOver();
                     }
                 });
 
@@ -94,6 +199,23 @@ public class GamePlay extends AppCompatActivity {
                 buttons[row][col] = button;
             }
         }
+        Toast.makeText(GamePlay.this, "Num of rows is: " + gameboard.getNumBoardRows() +
+                " Num of Cols is: " + gameboard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void gameOver(){
+        if(asteroidsFound == gameboard.getNumOfAsteroids()){
+            Intent CongratsScreen = passDataToCongratsScreen(GamePlay.this, asteroidsFound, numOfScans);
+            startActivity(CongratsScreen);
+            finish();
+        }
+    }
+
+    public static Intent passDataToCongratsScreen(Context context, int asteroidsFound, int scansUsed){
+        Intent gameInfo = new Intent(context, CongratsScreen.class);
+        gameInfo.putExtra(UI_GAME_PLAY_ACTIVITY_ASTEROIDS_FOUND, asteroidsFound);
+        gameInfo.putExtra(UI_GAME_PLAY_ACTIVITY_SCANS_USED, scansUsed);
+        return gameInfo;
     }
 
     private void gridButtonClicked(int col, int row) {
@@ -108,21 +230,47 @@ public class GamePlay extends AppCompatActivity {
         // Scale image to button: Only works in JellyBean!
         // Image from Crystal Clear icon set, under LGPL
         // http://commons.wikimedia.org/wiki/Crystal_Clear
+
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
+        changeButtonPicture(button, row, col, newWidth, newHeight);
+
+    }
+
+    public void changeButtonPicture(Button button, int row, int col, int newWidth, int newHeight){
+        if (isAsteroidHidden(row, col)){
+            populateAsteroidButton(button, newWidth, newHeight);
+            showNearbyAsteroids(button, row, col);
+        }
+        else{
+            showNearbyAsteroids(button, row, col);
+        }
+    }
+
+    private boolean isAsteroidHidden(int row, int col){
+        BoardSquare currentSquare = gameboard.getSpecificSquare(row, col);
+        return currentSquare.getIsAsteroid();
+
+    }
+
+    private void populateAsteroidButton(Button button, int newWidth, int newHeight){
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.asteroid);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
-
-        // Change text on button:
-        button.setText("" + col);
+        lockButtonSizes();
 
     }
 
+    public void showNearbyAsteroids(Button button, int row, int col){
+        BoardSquare currentSquare = gameboard.getSpecificSquare(row, col);
+        int nearbyAsteroids = currentSquare.getAsteroidsNearby();
+        button.setText("" + nearbyAsteroids);
+    }
+
     private void lockButtonSizes() {
-        for (int row = 0; row < NUM_ROWS; row++) {
-            for (int col = 0; col < NUM_COLS; col++) {
+        for (int row = 0; row < numOfRows; row++) {
+            for (int col = 0; col < numOfCols; col++) {
                 Button button = buttons[row][col];
 
                 int width = button.getWidth();

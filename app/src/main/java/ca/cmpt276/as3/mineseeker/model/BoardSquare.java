@@ -5,14 +5,21 @@ package ca.cmpt276.as3.mineseeker.model;
 */
 
 public class BoardSquare {
-    private boolean isMine;
-    private int minesNearby;
+    private boolean isAsteroid;
+    private int asteroidsNearby;
     private int squareRow;
     private int squareColumn;
 
-    public BoardSquare(boolean isMine, int mineNearby) {
-        this.isMine = isMine;
-        this.minesNearby = mineNearby;
+    public BoardSquare() {
+        this.isAsteroid = false;
+        this.asteroidsNearby = 0;
+    }
+
+    public BoardSquare(int squareRow, int squareColumn) {
+        this.isAsteroid = false;
+        this.asteroidsNearby = 0;
+        this.squareRow = squareRow;
+        this.squareColumn = squareColumn;
     }
 
     public int getSquareRow() {
@@ -30,23 +37,23 @@ public class BoardSquare {
     public void setSquareColumn(int squareColumn) {
         this.squareColumn = squareColumn;
     }
-    public void setToMine(){
-        this.isMine = true;
+    public void setToAsteroid(){
+        this.isAsteroid = true;
     }
 
-    public boolean getIsMine() {
-        return isMine;
+    public boolean getIsAsteroid() {
+        return isAsteroid;
     }
 
-    public int getMineNearby() {
-        return minesNearby;
+    public int getAsteroidsNearby() {
+        return asteroidsNearby;
     }
 
-    public void setMinesNearby(int minesNearby) {
-        this.minesNearby = minesNearby;
+    public void setAsteroidsNearby(int asteroidsNearby) {
+        this.asteroidsNearby = asteroidsNearby;
     }
 
-    public void changeToMine() {
-        isMine = true;
+    public void setAsteroid(boolean isAsteroid) {
+        this.isAsteroid = isAsteroid;
     }
 }

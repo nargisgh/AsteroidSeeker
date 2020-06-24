@@ -2,57 +2,68 @@ package ca.cmpt276.as3.mineseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import ca.cmpt276.as3.mineseeker.R;
 import ca.cmpt276.as3.mineseeker.model.GameBoard;
 
 public class Options extends AppCompatActivity {
-    Button eraseBtn;
     public GameBoard gameBoard;
-    Spinner boardDropdown;
-    Spinner asteroidDropdown;
     MediaPlayer space;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
-        gameBoard= GameBoard.getInstance();
+        gameBoard = GameBoard.getInstance();
         eraseBtn();
-        BoardDropdown();
-        AsteroidDropdown();
+        chooseAsteroidsBtn();
+        chooseBoardDimensionsBtn();
+        setAsteroid();
+
         space = MediaPlayer.create(Options.this, R.raw.sound);
         space.start();
+
         // Spinner citation: https://developer.android.com/guide/topics/ui/controls/spinner
-
-
     }
 
-    private void AsteroidDropdown() {
-        asteroidDropdown = findViewById(R.id.asteroidOptions);
-        String [] items = new String[]{"Select:","6","10","15","20"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,items);
-        asteroidDropdown.setAdapter(adapter);
+    public void setAsteroid(){
+        int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
+        gameBoard.setNumOfAsteroids(chosenAsteroids);
+        Toast.makeText(Options.this, "Num of rows is: " + gameBoard.getNumBoardRows() +
+                " Num of Cols is: " + gameBoard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
     }
 
-    private void BoardDropdown() {
-        boardDropdown = findViewById(R.id.boardOptions);
-        String [] items = new String[] {"Select:","4 x 6","5 x 10", "6 x 15"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,items);
-        boardDropdown.setAdapter(adapter);
+    private void chooseAsteroidsBtn(){
+        Button chooseAsteroidsBtn = findViewById(R.id.btnNumAsteroids);
+        chooseAsteroidsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToChooseAsteroids = ChooseAsteroids.makeIntent(Options.this);
+                startActivity(goToChooseAsteroids);
+            }
+        });
+    }
+
+    private void chooseBoardDimensionsBtn(){
+        Button chooseDimensions = findViewById(R.id.btnBoardSize);
+        chooseDimensions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToChooseBoardSize = ChooseBoardSize.makeIntent(Options.this);
+                startActivity(goToChooseBoardSize);
+            }
+        });
     }
 
     private void eraseBtn() {
-        eraseBtn = findViewById(R.id.erasebtn);
-        eraseBtn.setOnClickListener(new View.OnClickListener() {
+        Button btnEraseNumPlayed = findViewById(R.id.erasebtn);
+        btnEraseNumPlayed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gameBoard.removeNumPlayed();
