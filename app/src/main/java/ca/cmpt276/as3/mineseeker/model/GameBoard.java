@@ -4,18 +4,22 @@ package ca.cmpt276.as3.mineseeker.model;
  * This is a GameBoard class that stores BoardSquare Objects
  */
 
+import android.content.Context;
+
 import java.util.Random;
+import ca.cmpt276.as3.mineseeker.ui.ChooseAsteroids;
+
 
 public class GameBoard {
 
     public static final int TEMP_ROW_NUM = 4;
     public static final int TEMP_COL_NUM = 5;
-    public static final int TEMP_ASTEROID_COUNT = 7;
+    //public static final int TEMP_ASTEROID_COUNT = 7;
     private BoardSquare[][] gameBoard;
     private static GameBoard instance;
     private int numBoardRows = TEMP_ROW_NUM;
     private int numBoardColumns = TEMP_COL_NUM;
-    private int numOfAsteroids = TEMP_ASTEROID_COUNT;
+    private int numOfAsteroids;
 
     private static int NumPlayed = 0;
 
@@ -74,15 +78,17 @@ public class GameBoard {
         return gameBoard[row][column];
     }
 
-    public void presets(){
-        initializeGameBoard();
+    public void presets(int numOfAsteroids, int numOfRows, int numOfCols){
+        initializeGameBoard(numOfAsteroids, numOfRows, numOfCols);
         distributeAsteroids();
         setNearbyAsteroidCount();
-
     }
 
-    public void initializeGameBoard(){
-        gameBoard = new BoardSquare[numBoardRows][numBoardColumns];
+    public void initializeGameBoard(int asteroids, int rows, int cols){
+        this.numOfAsteroids = asteroids;
+        this.numBoardRows = rows;
+        this.numBoardColumns = cols;
+        gameBoard = new BoardSquare[rows][cols];
         for(int row = 0 ; row < numBoardRows; row++){
             for(int column = 0; column < numBoardColumns; column++){
                 BoardSquare currentSquare = new BoardSquare(row, column);

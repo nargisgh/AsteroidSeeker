@@ -1,9 +1,10 @@
-package ca.cmpt276.as3.mineseeker;
+package ca.cmpt276.as3.mineseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +12,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import ca.cmpt276.as3.mineseeker.ui.ChooseAsteroids;
-import ca.cmpt276.as3.mineseeker.ui.Options;
+import ca.cmpt276.as3.mineseeker.R;
 
 public class ChooseBoardSize extends AppCompatActivity {
+
+    public static final String PREFERENCES = "App Preferences";
+    public static final String CHOSEN_NUMBER_OF_ROWS = "chosen number of Rows";
+    public static final String CHOSEN_NUMBER_OF_COLS = "chosen number of Cols";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +53,42 @@ public class ChooseBoardSize extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(ChooseBoardSize.this, "You Clicked me: " + currentDimensions, Toast.LENGTH_SHORT).show();
+
+                    saveNumRowsAndCols(numberOfRows, numberOfCols);
                 }
             });
 
             //add to radioGroup
             group.addView(boardSizeBtn);
+            boolean isSelectedRow = (numberOfRows == getSavedRows(this));
+            boolean isSelectedColumn = (numberOfCols == getSavedCols(this));
+
+            if(isSelectedRow && isSelectedColumn){
+                boardSizeBtn.setChecked(true);
+            }
+
+            Toast.makeText(ChooseBoardSize.this, "Num of Asteroids is: ", Toast.LENGTH_SHORT);
         }
+    }
+
+    private void saveNumRowsAndCols(int numRows, int numCols){
+        SharedPreferences preferences = this.getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(CHOSEN_NUMBER_OF_ROWS, numRows);
+        editor.putInt(CHOSEN_NUMBER_OF_COLS, numCols);
+        editor.apply();
+    }
+
+    static public int getSavedRows(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        int defaultRows = context.getResources().getInteger(R.integer.default_num_rows);
+        return preferences.getInt(CHOSEN_NUMBER_OF_ROWS, defaultRows);
+    }
+
+    static public int getSavedCols(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        int defaultCols = context.getResources().getInteger(R.integer.default_num_columns);
+        return preferences.getInt(CHOSEN_NUMBER_OF_COLS, defaultCols);
     }
 
 

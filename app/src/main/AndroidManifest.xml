@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ChooseBoardSize"
+            android:name=".ui.ChooseBoardSize"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.ChooseAsteroids"

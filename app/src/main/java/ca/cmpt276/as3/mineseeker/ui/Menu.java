@@ -6,13 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import ca.cmpt276.as3.mineseeker.R;
+import ca.cmpt276.as3.mineseeker.model.GameBoard;
 
 public class Menu extends AppCompatActivity {
     Button btnHelp;
     Button btnPlay;
     Button btnOptions;
+    GameBoard gameBoard = GameBoard.getInstance();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +25,23 @@ public class Menu extends AppCompatActivity {
         BtnHelp();
         BtnOptions();
         BtnGamePlay();
+        setAsteroid();
+        setDimensions();
+    }
+
+    public void setAsteroid(){
+        int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
+        gameBoard.setNumOfAsteroids(chosenAsteroids);
+        Toast.makeText(Menu.this, "Num of Asteroids is: " + gameBoard.getNumOfAsteroids(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void setDimensions(){
+        int rowLength = ChooseBoardSize.getSavedRows(this);
+        int colsLength = ChooseBoardSize.getSavedCols(this);
+        gameBoard.setNumBoardColumns(colsLength);
+        gameBoard.setNumBoardRows(rowLength);
+        Toast.makeText(Menu.this, "Num of rows is: " + gameBoard.getNumBoardRows() +
+                " Num of Cols is: " + gameBoard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
     }
 
     private void BtnGamePlay() {

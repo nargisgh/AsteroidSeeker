@@ -2,23 +2,13 @@ package ca.cmpt276.as3.mineseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import ca.cmpt276.as3.mineseeker.ChooseBoardSize;
 import ca.cmpt276.as3.mineseeker.R;
 import ca.cmpt276.as3.mineseeker.model.GameBoard;
 
@@ -34,11 +24,18 @@ public class Options extends AppCompatActivity {
         eraseBtn();
         chooseAsteroidsBtn();
         chooseBoardDimensionsBtn();
+        setAsteroid();
 
         space = MediaPlayer.create(Options.this, R.raw.sound);
         space.start();
 
         // Spinner citation: https://developer.android.com/guide/topics/ui/controls/spinner
+    }
+
+    public void setAsteroid(){
+        int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
+        gameBoard.setNumOfAsteroids(chosenAsteroids);
+        Toast.makeText(Options.this, "Num of Asteroids is: " + gameBoard.getNumOfAsteroids(), Toast.LENGTH_SHORT).show();
     }
 
     private void chooseAsteroidsBtn(){

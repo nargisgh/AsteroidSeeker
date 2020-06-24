@@ -12,4 +12,8 @@
         <item>15</item>
     </integer-array>
 
+    <integer name="default_num_rows">4</integer>
+
+    <integer name="default_num_columns">6</integer>
+
 </resources>
