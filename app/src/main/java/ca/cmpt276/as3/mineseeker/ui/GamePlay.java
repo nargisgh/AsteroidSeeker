@@ -54,10 +54,6 @@ public class GamePlay extends AppCompatActivity {
         Toast.makeText(GamePlay.this, "Num of rows is: " + gameboard.getNumBoardRows() +
                 " Num of Cols is: " + gameboard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
 
-        //NumPlayed++;
-
-        //HideAsteroid();
-        //UpdateScan();
         NumPlayed();
     }
     @Override
@@ -165,9 +161,18 @@ public class GamePlay extends AppCompatActivity {
 
     private void incrementScansText(int row, int col){
         TextView scanCount = findViewById(R.id.scanstxt);
-        if(scanChecker[row][col] <= 2){
-            numOfScans++;
-            scanChecker[row][col]++;
+        BoardSquare currentSquare = gameboard.getSpecificSquare(row, col);
+        if(currentSquare.getIsAsteroid() || currentSquare.isFound()){
+            if(scanChecker[row][col] < 2){
+                numOfScans++;
+                scanChecker[row][col]++;
+            }
+        }
+        else {
+            if(scanChecker[row][col] < 1){
+                numOfScans++;
+                scanChecker[row][col]++;
+            }
         }
         scanCount.setText("Scans Taken: " + numOfScans);
     }

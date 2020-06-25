@@ -18,8 +18,8 @@ import ca.cmpt276.as3.mineseeker.model.GameBoard;
 public class ChooseBoardSize extends AppCompatActivity {
 
     public static final String PREFERENCES = "App Preferences";
-    public static final String CHOSEN_NUMBER_OF_ROWS = "chosen number of Rows";
-    public static final String CHOSEN_NUMBER_OF_COLS = "chosen number of Cols";
+    public static final String CHOSEN_NUMBER_OF_ROWS = "chosen the number of Row";
+    public static final String CHOSEN_NUMBER_OF_COLS = "chosen the number of Columns";
     public GameBoard gameBoard = GameBoard.getInstance();
 
     @Override
@@ -64,10 +64,9 @@ public class ChooseBoardSize extends AppCompatActivity {
 
             //add to radioGroup
             group.addView(boardSizeBtn);
-            boolean isSelectedRow = (numberOfRows == getSavedRows(this));
-            boolean isSelectedColumn = (numberOfCols == getSavedCols(this));
 
-            if(isSelectedRow && isSelectedColumn){
+
+            if(numberOfRows == getSavedRows(this)){
                 boardSizeBtn.setChecked(true);
             }
         }
@@ -92,6 +91,5 @@ public class ChooseBoardSize extends AppCompatActivity {
         int defaultCols = context.getResources().getInteger(R.integer.default_num_columns);
         return preferences.getInt(CHOSEN_NUMBER_OF_COLS, defaultCols);
     }
-
 
 }

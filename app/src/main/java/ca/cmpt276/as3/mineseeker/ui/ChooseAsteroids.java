@@ -16,8 +16,8 @@ import ca.cmpt276.as3.mineseeker.R;
 
 public class ChooseAsteroids extends AppCompatActivity {
 
-    public static final String NUM_ASTEROIDS_TO_FIND = "Num Asteroids";
-    public static final String APP_PREFERENCES = "AppPrefs";
+    public static final String NUM_ASTEROIDS_TO_FIND = "The Number of Asteroids to find";
+    public static final String APP_PREFERENCES = "App Preferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
