@@ -12,7 +12,10 @@ import android.widget.Toast;
 import ca.cmpt276.as3.asteroidseeker.R;
 import ca.cmpt276.as3.asteroidseeker.model.GameBoard;
 
-
+/*
+* Options Class allows us to clear the counter for the number of times the game was played or go to
+* an activity that will allow you to change settings pertaining to a game
+*/
 
 public class Options extends AppCompatActivity {
     public GameBoard gameBoard;
