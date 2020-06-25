@@ -15,6 +15,8 @@ public class GameBoard {
     private int numBoardRows;
     private int numBoardColumns;
     private int numOfAsteroids;
+    private int[][] asteroidChecker;
+    private int[][] scanChecker;
 
     private static int NumPlayed = 0;
 
@@ -23,6 +25,22 @@ public class GameBoard {
             instance = new GameBoard();
         }
         return instance;
+    }
+
+    public int[][] getAsteroidChecker() {
+        return asteroidChecker;
+    }
+
+    public void setAsteroidChecker(int[][] asteroidChecker) {
+        this.asteroidChecker = asteroidChecker;
+    }
+
+    public int[][] getScanChecker() {
+        return scanChecker;
+    }
+
+    public void setScanChecker(int[][] scanChecker) {
+        this.scanChecker = scanChecker;
     }
 
     public int getNumPlayed() {

@@ -37,16 +37,14 @@ public class GamePlay extends AppCompatActivity {
     private int numOfAsteroids;
 
 
-    Button[][] dynamicBoardSqareBtns;
+    Button[][] dynamicBoardSquareBtns;
     private int asteroidsLeft;
     private int asteroidsFound;
 
 
     //public static int NumPlayed = 0;
-    TextView timesPlayedtxt;
+    TextView timesPlayedTxt;
     MediaPlayer space;
-    private int[][] asteroidChecker;
-    private int[][] scanChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,11 +117,13 @@ public class GamePlay extends AppCompatActivity {
     }
 
     private void NumPlayed() {
-        timesPlayedtxt = findViewById(R.id.timesPlayedtxt);
-        timesPlayedtxt.setText("Times Played: " + gameboard.getNumPlayed());
+        timesPlayedTxt = findViewById(R.id.timesPlayedtxt);
+        timesPlayedTxt.setText("Times Played: " + gameboard.getNumPlayed());
     }
 
     private void updateGameTextViews(int row, int col){
+        int[][] asteroidChecker = gameboard.getAsteroidChecker();
+        int[][] scanChecker = gameboard.getScanChecker();
         BoardSquare boardSquare = gameboard.getSpecificSquare(row, col);
         if(asteroidChecker[row][col] == 0 && boardSquare.getIsAsteroid()){
             incrementFoundAsteroidsText(row, col);
@@ -135,23 +135,25 @@ public class GamePlay extends AppCompatActivity {
     }
 
     private void initializeCheckers(){
-        asteroidChecker = new int[numOfRows][numOfCols];
-        scanChecker = new int[numOfRows][numOfCols];
+        int[][] asteroidChecker = new int[numOfRows][numOfCols];
+        int[][] scanChecker = new int[numOfRows][numOfCols];
         for(int row = 0; row < numOfRows; row++){
             for (int col = 0; col < numOfCols; col++){
                 asteroidChecker[row][col] = 0;
                 scanChecker[row][col] = 0;
             }
         }
+        gameboard.setAsteroidChecker(asteroidChecker);
+        gameboard.setScanChecker(scanChecker);
     }
 
     private void refreshFoundAsteroidsTxt(){
         TextView asteroidCount = findViewById(R.id.foundtxt);
-        //int numAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
         asteroidCount.setText("Found " + asteroidsFound + " Asteroids, " + asteroidsLeft + " Remain");
     }
 
     private void incrementFoundAsteroidsText(int row, int col){
+        int[][] asteroidChecker = gameboard.getAsteroidChecker();
         asteroidsFound++;
         asteroidsLeft--;
         TextView asteroidCount = findViewById(R.id.foundtxt);
@@ -160,6 +162,7 @@ public class GamePlay extends AppCompatActivity {
     }
 
     private void incrementNumScansText(int row, int col){
+        int[][] scanChecker = gameboard.getScanChecker();
         TextView scanCount = findViewById(R.id.scanstxt);
         BoardSquare currentSquare = gameboard.getSpecificSquare(row, col);
         if(currentSquare.getIsAsteroid() || currentSquare.isFound()){
@@ -178,7 +181,7 @@ public class GamePlay extends AppCompatActivity {
     }
 
     private void populateBoardSquareButtons() {
-        dynamicBoardSqareBtns = new Button[numOfRows][numOfCols];
+        dynamicBoardSquareBtns = new Button[numOfRows][numOfCols];
         TableLayout table = findViewById(R.id.tableForButtons);
 
         for (int row = 0; row < numOfRows; row++) {
@@ -212,7 +215,7 @@ public class GamePlay extends AppCompatActivity {
                 });
 
                 tableRow.addView(button);
-                dynamicBoardSqareBtns[row][col] = button;
+                dynamicBoardSquareBtns[row][col] = button;
             }
         }
     }
@@ -233,7 +236,7 @@ public class GamePlay extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int col, int row) {
-        Button button = dynamicBoardSqareBtns[row][col];
+        Button button = dynamicBoardSquareBtns[row][col];
 
         // Lock Button Sizes:
         lockButtonSizes();
@@ -249,10 +252,12 @@ public class GamePlay extends AppCompatActivity {
     }
 
     public void hideNumAsteroidsNearby(){
+        int[][] asteroidChecker = gameboard.getAsteroidChecker();
+        int[][] scanChecker = gameboard.getScanChecker();
         for(int row = 0; row < numOfRows; row++){
             for(int col = 0; col < numOfCols; col++){
                 BoardSquare currentSquare = gameboard.getSpecificSquare(row, col);
-                Button currentBtn = dynamicBoardSqareBtns[row][col];
+                Button currentBtn = dynamicBoardSquareBtns[row][col];
                 if((asteroidChecker[row][col] == 1) && (scanChecker[row][col] == 1)){
                     currentBtn.setText("");
                 }
@@ -261,6 +266,8 @@ public class GamePlay extends AppCompatActivity {
     }
 
     public void changeButtonPicture(Button button, int row, int col, int newWidth, int newHeight){
+        int[][] asteroidChecker = gameboard.getAsteroidChecker();
+        int[][] scanChecker = gameboard.getScanChecker();
         if (isAsteroidHidden(row, col)){
             populateAsteroidButton(button, newWidth, newHeight);
             if(asteroidChecker[row][col] > 0){
@@ -294,11 +301,12 @@ public class GamePlay extends AppCompatActivity {
     }
 
     public void showNearbyAsteroids(){
+        int[][] scanChecker = gameboard.getScanChecker();
         for (int row = 0; row < numOfRows; row++){
             for(int cols = 0; cols < numOfCols; cols++){
                 BoardSquare currentSquare = gameboard.getSpecificSquare(row, cols);
                 int nearbyAsteroids = currentSquare.getAsteroidsNearby();
-                Button button = dynamicBoardSqareBtns[row][cols];
+                Button button = dynamicBoardSquareBtns[row][cols];
                 if(scanChecker[row][cols] > 0){
                     button.setText("" + nearbyAsteroids);
                 }
@@ -309,7 +317,7 @@ public class GamePlay extends AppCompatActivity {
     private void lockButtonSizes() {
         for (int row = 0; row < numOfRows; row++) {
             for (int col = 0; col < numOfCols; col++) {
-                Button button = dynamicBoardSqareBtns[row][col];
+                Button button = dynamicBoardSquareBtns[row][col];
 
                 int width = button.getWidth();
                 button.setMinWidth(width);
