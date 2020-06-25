@@ -47,6 +47,14 @@ public class BoardSquare {
         return isAsteroid;
     }
 
+    public boolean isFound() {
+        return isFound;
+    }
+
+    public void setFound(boolean found) {
+        isFound = found;
+    }
+
     public int getAsteroidsNearby() {
         return asteroidsNearby;
     }

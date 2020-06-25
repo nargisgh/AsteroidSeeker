@@ -118,6 +118,7 @@ public class GameBoard {
 
     public void changeNearbyAsteroidCount(BoardSquare boardSquare){
         boardSquare.setAsteroid(false);
+        boardSquare.setFound(true);
         setNearbyAsteroidCount();
     }
 

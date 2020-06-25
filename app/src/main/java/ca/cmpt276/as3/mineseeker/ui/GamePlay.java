@@ -248,19 +248,33 @@ public class GamePlay extends AppCompatActivity {
 
     }
 
+    public void hideAsteroids(){
+        for(int row = 0; row < numOfRows; row++){
+            for(int col = 0; col < numOfCols; col++){
+                BoardSquare currentSquare = gameboard.getSpecificSquare(row, col);
+                Button currentBtn = buttons[row][col];
+                if((asteroidChecker[row][col] == 1) && (scanChecker[row][col] == 1)){
+                    currentBtn.setText("");
+                }
+            }
+        }
+    }
+
     public void changeButtonPicture(Button button, int row, int col, int newWidth, int newHeight){
         if (isAsteroidHidden(row, col)){
             populateAsteroidButton(button, newWidth, newHeight);
             if(asteroidChecker[row][col] > 0){
                 BoardSquare boardSquare = gameboard.getSpecificSquare(row, col);
                 gameboard.changeNearbyAsteroidCount(boardSquare);
-                if(scanChecker[row][col] > 0){
+                if(scanChecker[row][col] > 0 && boardSquare.isFound()){
                     showNearbyAsteroids();
+                    hideAsteroids();
                 }
             }
         }
         else{
             showNearbyAsteroids();
+            hideAsteroids();
         }
     }
 
@@ -288,7 +302,6 @@ public class GamePlay extends AppCompatActivity {
                 if(scanChecker[row][cols] > 0){
                     button.setText("" + nearbyAsteroids);
                 }
-
             }
         }
     }
