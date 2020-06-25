@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker.ui;
+package ca.cmpt276.as3.asteroidseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +12,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import ca.cmpt276.as3.mineseeker.R;
-import ca.cmpt276.as3.mineseeker.model.GameBoard;
-
+import ca.cmpt276.as3.asteroidseeker.R;
+import ca.cmpt276.as3.asteroidseeker.model.GameBoard;
+/*
+ * This is a ChooseBoardSize class that makes a list of sizes for our GameBoard instance and allows data
+ * pertaining to the class to be passed to other activities.
+ */
 public class ChooseBoardSize extends AppCompatActivity {
 
     public static final String PREFERENCES = "App Preferences";
@@ -56,8 +59,6 @@ public class ChooseBoardSize extends AppCompatActivity {
             boardSizeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(ChooseBoardSize.this, "You Clicked me: " + currentDimensions, Toast.LENGTH_SHORT).show();
-
                     saveNumRowsAndCols(numberOfRows, numberOfCols);
                 }
             });

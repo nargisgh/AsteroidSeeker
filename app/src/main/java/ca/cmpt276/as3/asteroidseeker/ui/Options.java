@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker.ui;
+package ca.cmpt276.as3.asteroidseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import ca.cmpt276.as3.mineseeker.R;
-import ca.cmpt276.as3.mineseeker.model.GameBoard;
+import ca.cmpt276.as3.asteroidseeker.R;
+import ca.cmpt276.as3.asteroidseeker.model.GameBoard;
+
+
 
 public class Options extends AppCompatActivity {
     public GameBoard gameBoard;
@@ -40,8 +42,6 @@ public class Options extends AppCompatActivity {
     public void setAsteroid(){
         int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
         gameBoard.setNumOfAsteroids(chosenAsteroids);
-        Toast.makeText(Options.this, "Num of rows is: " + gameBoard.getNumBoardRows() +
-                " Num of Cols is: " + gameBoard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
     }
 
     private void chooseAsteroidsBtn(){
@@ -72,7 +72,7 @@ public class Options extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gameBoard.removeNumPlayed();
-                Toast.makeText(Options.this, "Number of times played set to 0!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Options.this, "Number of times played set to 0",Toast.LENGTH_SHORT).show();
             }
         });
     }

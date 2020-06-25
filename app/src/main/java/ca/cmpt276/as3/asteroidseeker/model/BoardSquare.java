@@ -1,7 +1,8 @@
-package ca.cmpt276.as3.mineseeker.model;
+package ca.cmpt276.as3.asteroidseeker.model;
 
 /*
-* This is a BoardSquare Class that stores data for each square in the minesweeper game
+* This is a BoardSquare Class that stores data for each square in the Asteroid Seeker Game such as
+* whether the asteroid was found, whether it was
 */
 
 public class BoardSquare {
@@ -10,11 +11,6 @@ public class BoardSquare {
     private int asteroidsNearby;
     private int squareRow;
     private int squareColumn;
-
-    public BoardSquare() {
-        this.isAsteroid = false;
-        this.asteroidsNearby = 0;
-    }
 
     public BoardSquare(int squareRow, int squareColumn) {
         this.isAsteroid = false;
@@ -28,17 +24,10 @@ public class BoardSquare {
         return squareRow;
     }
 
-    public void setSquareRow(int squareRow) {
-        this.squareRow = squareRow;
-    }
-
     public int getSquareColumn() {
         return squareColumn;
     }
 
-    public void setSquareColumn(int squareColumn) {
-        this.squareColumn = squareColumn;
-    }
     public void setToAsteroid(){
         this.isAsteroid = true;
     }

@@ -1,8 +1,7 @@
-package ca.cmpt276.as3.mineseeker.ui;
+package ca.cmpt276.as3.asteroidseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -10,7 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import ca.cmpt276.as3.mineseeker.R;
+import ca.cmpt276.as3.asteroidseeker.R;
+/*
+* This is the HelpMenuClass that displays Instruction on how to play the game, as well as citations
+* for code and images and other things taken from or inspired from other places
+*/
 
 public class HelpMenu extends AppCompatActivity {
     Button okBtn;
@@ -26,6 +29,7 @@ public class HelpMenu extends AppCompatActivity {
         space.start();
         OkBtn();
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

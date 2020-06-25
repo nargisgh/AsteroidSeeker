@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker;
+package ca.cmpt276.as3.asteroidseeker;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import ca.cmpt276.as3.mineseeker.ui.Menu;
+import ca.cmpt276.as3.asteroidseeker.ui.Menu;
+/*
+* This is the MainActivity Class that displays the welcome screen and the Developers names
+*/
 
 public class MainActivity extends AppCompatActivity {
     Animation ranimation;
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent =new Intent(MainActivity.this, Menu.class);
+                Intent intent = new Intent(MainActivity.this, Menu.class);
                 space.release();
                 startActivity(intent);
 

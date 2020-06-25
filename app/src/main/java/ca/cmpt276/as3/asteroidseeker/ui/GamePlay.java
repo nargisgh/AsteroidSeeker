@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker.ui;
+package ca.cmpt276.as3.asteroidseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,10 +17,16 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ca.cmpt276.as3.mineseeker.R;
-import ca.cmpt276.as3.mineseeker.model.BoardSquare;
-import ca.cmpt276.as3.mineseeker.model.GameBoard;
+import ca.cmpt276.as3.asteroidseeker.R;
+import ca.cmpt276.as3.asteroidseeker.model.BoardSquare;
+import ca.cmpt276.as3.asteroidseeker.model.GameBoard;
+/*
+* This is the GamePlayClass, it holds methods that changes the state of the buttons that represent the
+* UI of the GameBoard Class, it also displays the asteroids found/ number to find as well as number of
+* scans of the GameBoard made
+*/
 
+//Code from this
 public class GamePlay extends AppCompatActivity {
     public GameBoard gameboard = GameBoard.getInstance();
     private int numOfScans = INITIAL_SCAN_COUNT;
@@ -51,9 +57,6 @@ public class GamePlay extends AppCompatActivity {
         space.start();
         //NumPlayed++;
         setUpGamePlay();
-        Toast.makeText(GamePlay.this, "Num of rows is: " + gameboard.getNumBoardRows() +
-                " Num of Cols is: " + gameboard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
-
         NumPlayed();
     }
     @Override
@@ -68,7 +71,6 @@ public class GamePlay extends AppCompatActivity {
         populateButtons();
         gameboard.presets(findNumOfAsteroids(), getNumRows(), getNumCols());
         refreshFoundTxt();
-        //populateButtons();
         initializeCheckers();
     }
 

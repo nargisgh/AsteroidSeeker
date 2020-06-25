@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker;
+package ca.cmpt276.as3.asteroidseeker;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker.model;
+package ca.cmpt276.as3.asteroidseeker.model;
 
 import org.junit.Test;
 

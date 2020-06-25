@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker.ui;
+package ca.cmpt276.as3.asteroidseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,18 +8,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
 
-import ca.cmpt276.as3.mineseeker.R;
-import ca.cmpt276.as3.mineseeker.model.GameBoard;
-
-import static ca.cmpt276.as3.mineseeker.ui.GamePlay.UI_GAME_PLAY_ACTIVITY_SCANS_USED;
+import ca.cmpt276.as3.asteroidseeker.R;
+import ca.cmpt276.as3.asteroidseeker.model.GameBoard;
+/*
+* This is the Congratulations Screen Class which displays a message to congratulate the user after they
+* complete the game, and shows them how many scans it took them to complete the game. When moved back from this
+* screen the user goes back to the main menu
+*/
 
 public class CongratsScreen extends AppCompatActivity {
+    public static final int X_PARAM = 0;
+    public static final int Y_PARAM = -20;
     public GameBoard gameBoard;
     MediaPlayer congratulations;
 
@@ -49,8 +52,8 @@ public class CongratsScreen extends AppCompatActivity {
         getWindow().setLayout((int)(width*.85),(int)(height*.7));
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
-        params.x = 0;
-        params.y = -20;
+        params.x = X_PARAM;
+        params.y = Y_PARAM;
         getWindow().setAttributes(params);
     }
 }

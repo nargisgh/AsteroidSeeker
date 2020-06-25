@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker.ui;
+package ca.cmpt276.as3.asteroidseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import ca.cmpt276.as3.mineseeker.R;
-import ca.cmpt276.as3.mineseeker.model.GameBoard;
+import ca.cmpt276.as3.asteroidseeker.R;
+import ca.cmpt276.as3.asteroidseeker.model.GameBoard;
+/*
+* This the Menu class It allows us to either immediately play a game or, we can customize setting
+* pertaining to the Asteroid Seeker GameBoard or see citations or get help with the game in the help menu
+*/
 
 public class Menu extends AppCompatActivity {
     Button btnHelp;
@@ -39,8 +42,6 @@ public class Menu extends AppCompatActivity {
         int colsLength = ChooseBoardSize.getSavedCols(this);
         gameBoard.setNumBoardColumns(colsLength);
         gameBoard.setNumBoardRows(rowLength);
-        Toast.makeText(Menu.this, "Num of rows is: " + gameBoard.getNumBoardRows() +
-                " Num of Cols is: " + gameBoard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

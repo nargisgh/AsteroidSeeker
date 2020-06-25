@@ -1,4 +1,4 @@
-package ca.cmpt276.as3.mineseeker.ui;
+package ca.cmpt276.as3.asteroidseeker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,8 +12,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import ca.cmpt276.as3.mineseeker.R;
-
+import ca.cmpt276.as3.asteroidseeker.R;
+/*
+* This is a ChooseAsteroids class that makes gives us a selection of asteroids numbers to hide in our
+* GameBoard instance and allows data pertaining to the class to be passed to other activities
+*/
 public class ChooseAsteroids extends AppCompatActivity {
 
     public static final String NUM_ASTEROIDS_TO_FIND = "The Number of Asteroids to find";
@@ -40,7 +43,7 @@ public class ChooseAsteroids extends AppCompatActivity {
 
         int[] numAsteroids = getResources().getIntArray(R.array.num_asteroids_to_find);
 
-        //create buttons:
+        //create buttons
         for(int i = 0; i < numAsteroids.length; i++){
             final int numAsteroid = numAsteroids[i];
 
@@ -69,7 +72,6 @@ public class ChooseAsteroids extends AppCompatActivity {
         }
     }
 
-    //new
     private void saveNumAsteroidsToFind(int numAsteroids) {
         SharedPreferences preferences = this.getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

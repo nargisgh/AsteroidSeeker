@@ -1,24 +1,21 @@
-package ca.cmpt276.as3.mineseeker.model;
+package ca.cmpt276.as3.asteroidseeker.model;
 
 /*
- * This is a GameBoard class that stores BoardSquare Objects
+ * This is a Sinlgeton GameBoard class that stores BoardSquare Objects and allows the manipulation of the manipulation of
+ * the Singleton GameBoard instance and BoardSquare objects
  */
 
-import android.content.Context;
-
 import java.util.Random;
-import ca.cmpt276.as3.mineseeker.ui.ChooseAsteroids;
 
 
 public class GameBoard {
 
     public static final int TEMP_ROW_NUM = 4;
     public static final int TEMP_COL_NUM = 5;
-    //public static final int TEMP_ASTEROID_COUNT = 7;
     private BoardSquare[][] gameBoard;
     private static GameBoard instance;
-    private int numBoardRows = TEMP_ROW_NUM;
-    private int numBoardColumns = TEMP_COL_NUM;
+    private int numBoardRows;
+    private int numBoardColumns;
     private int numOfAsteroids;
 
     private static int NumPlayed = 0;
@@ -43,11 +40,6 @@ public class GameBoard {
 
     public GameBoard(){
         gameBoard = new BoardSquare[numBoardRows][numBoardColumns];
-    }
-
-
-    public BoardSquare[][] getGameBoard() {
-        return this.gameBoard;
     }
 
     public int getNumBoardRows() {

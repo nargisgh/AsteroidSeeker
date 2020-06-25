@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ca.cmpt276.as3.mineseeker">
+    package="ca.cmpt276.as3.asteroidseeker">
 
     <application
         android:allowBackup="true"
@@ -10,29 +10,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.ChooseBoardSize"
+            android:name="ca.cmpt276.as3.asteroidseeker.ui.ChooseBoardSize"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.ChooseAsteroids"
+            android:name="ca.cmpt276.as3.asteroidseeker.ui.ChooseAsteroids"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.CongratsScreen"
+            android:name="ca.cmpt276.as3.asteroidseeker.ui.CongratsScreen"
             android:screenOrientation="landscape"
             android:theme= "@style/AppTheme.Pop"/>
         <activity
-            android:name=".ui.GamePlay"
+            android:name="ca.cmpt276.as3.asteroidseeker.ui.GamePlay"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.Options"
+            android:name="ca.cmpt276.as3.asteroidseeker.ui.Options"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.HelpMenu"
+            android:name="ca.cmpt276.as3.asteroidseeker.ui.HelpMenu"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.Menu"
+            android:name="ca.cmpt276.as3.asteroidseeker.ui.Menu"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MainActivity"
+            android:name="ca.cmpt276.as3.asteroidseeker.MainActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
