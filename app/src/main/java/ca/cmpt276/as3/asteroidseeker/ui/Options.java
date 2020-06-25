@@ -25,24 +25,28 @@ public class Options extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
+
+        setUpOptionsActivity();
+    }
+
+    public void setUpOptionsActivity(){
         gameBoard = GameBoard.getInstance();
         eraseBtn();
         chooseAsteroidsBtn();
         chooseBoardDimensionsBtn();
-        setAsteroid();
+        setAsteroidHidden();
 
         space = MediaPlayer.create(Options.this, R.raw.sound);
         space.start();
-
-        // Spinner citation: https://developer.android.com/guide/topics/ui/controls/spinner
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         space.release();
     }
 
-    public void setAsteroid(){
+    public void setAsteroidHidden(){
         int chosenAsteroids = ChooseAsteroids.getNumAsteroidsToFind(this);
         gameBoard.setNumOfAsteroids(chosenAsteroids);
     }

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class ChooseAsteroids extends AppCompatActivity {
 
     public static final String NUM_ASTEROIDS_TO_FIND = "The Number of Asteroids to find";
     public static final String APP_PREFERENCES = "App Preferences";
+    public static final int TEXT_SIZE = 24;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +30,13 @@ public class ChooseAsteroids extends AppCompatActivity {
         setContentView(R.layout.activity_choose_asteroids);
 
         createAsteroidsToFindButtons();
-
-        int savedValue = getNumAsteroidsToFind(this);
-        Toast.makeText(this, "Saved Value: " + savedValue, Toast.LENGTH_SHORT).show();
-
     }
 
     public static Intent makeIntent(Context context){
         return new Intent(context, ChooseAsteroids.class);
     }
 
+    // From Dr. Frasers Video https://www.youtube.com/watch?v=m_ZiP0U_zRA&feature=youtu.be
     private void createAsteroidsToFindButtons() {
         RadioGroup group = (RadioGroup) findViewById(R.id.radio_group_board_size);
 
@@ -49,15 +48,12 @@ public class ChooseAsteroids extends AppCompatActivity {
 
             RadioButton numAsteroidsButton = new RadioButton(this);
             numAsteroidsButton.setText(getString(R.string.asteroids_tofind, numAsteroid));
-            numAsteroidsButton.setTextColor(Color.WHITE);
-            numAsteroidsButton.setTextSize(24);
+            setNumAsteroidBtnAppearance(numAsteroidsButton);
 
             //set callbacks
             numAsteroidsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(ChooseAsteroids.this, "You Clicked me " + numAsteroid, Toast.LENGTH_SHORT).show();
-                    //new
                     saveNumAsteroidsToFind(numAsteroid);
                 }
             });
@@ -70,6 +66,11 @@ public class ChooseAsteroids extends AppCompatActivity {
             }
 
         }
+    }
+
+    private void setNumAsteroidBtnAppearance(Button numAsteroidsButton){
+        numAsteroidsButton.setTextColor(Color.WHITE);
+        numAsteroidsButton.setTextSize(TEXT_SIZE);
     }
 
     private void saveNumAsteroidsToFind(int numAsteroids) {

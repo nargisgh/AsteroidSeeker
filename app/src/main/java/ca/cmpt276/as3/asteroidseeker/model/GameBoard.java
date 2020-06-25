@@ -10,8 +10,6 @@ import java.util.Random;
 
 public class GameBoard {
 
-    public static final int TEMP_ROW_NUM = 4;
-    public static final int TEMP_COL_NUM = 5;
     private BoardSquare[][] gameBoard;
     private static GameBoard instance;
     private int numBoardRows;
@@ -40,14 +38,6 @@ public class GameBoard {
 
     public GameBoard(){
         gameBoard = new BoardSquare[numBoardRows][numBoardColumns];
-    }
-
-    public int getNumBoardRows() {
-        return numBoardRows;
-    }
-
-    public int getNumBoardColumns() {
-        return numBoardColumns;
     }
 
     public void setNumBoardRows(int numBoardRows) {

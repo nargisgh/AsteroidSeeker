@@ -20,12 +20,14 @@ import ca.cmpt276.as3.asteroidseeker.ui.Menu;
 */
 
 public class MainActivity extends AppCompatActivity {
-    Animation ranimation;
+    Animation spinAnimation;
     ImageView myImage;
     ImageView astImage;
     Button skip;
     MediaPlayer space;
     private static int SPLASH_TIME = 6000;
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         myImage.setImageResource(R.drawable.rocketship);
         space = MediaPlayer.create(MainActivity.this, R.raw.sound);
         space.start();
-        fade();
+        fadeAnimation();
         rotateAnimation();
         skipBtn();
         new Handler().postDelayed(new Runnable() {
@@ -47,10 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         },SPLASH_TIME);
-
     }
 
-    private void fade() {
+    private void fadeAnimation() {
         astImage = findViewById(R.id.ast);
         Animation fade = AnimationUtils.loadAnimation(this, R.anim.fade);
         astImage.startAnimation(fade);
@@ -71,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void rotateAnimation() {
-        ranimation = AnimationUtils.loadAnimation(this,R.anim.rotate);
-        myImage.startAnimation(ranimation);
+        spinAnimation = AnimationUtils.loadAnimation(this,R.anim.rotate);
+        myImage.startAnimation(spinAnimation);
         //https://www.youtube.com/watch?v=goVoYf2qie0
         //For rounding edges of an image:
         // https://www.youtube.com/watch?v=oeQyEtY6a-M

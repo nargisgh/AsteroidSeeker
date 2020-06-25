@@ -8,9 +8,9 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import ca.cmpt276.as3.asteroidseeker.R;
 import ca.cmpt276.as3.asteroidseeker.model.GameBoard;
@@ -23,22 +23,21 @@ public class ChooseBoardSize extends AppCompatActivity {
     public static final String PREFERENCES = "App Preferences";
     public static final String CHOSEN_NUMBER_OF_ROWS = "chosen the number of Row";
     public static final String CHOSEN_NUMBER_OF_COLS = "chosen the number of Columns";
-    public GameBoard gameBoard = GameBoard.getInstance();
+    public static final int TEXT_SIZE = 24;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_board_size);
-        createBoardSizeRadioBtns();
-        Toast.makeText(ChooseBoardSize.this, "Num of rows is: " + gameBoard.getNumBoardRows() +
-                " Num of Cols is: " + gameBoard.getNumBoardColumns(), Toast.LENGTH_SHORT).show();
+        setUpBoardSizeRadioBtns();
     }
 
     public static Intent makeIntent(Context context) {
         return new Intent(context, ChooseBoardSize.class);
     }
 
-    private void createBoardSizeRadioBtns() {
+    // From Dr. Frasers Video https://www.youtube.com/watch?v=m_ZiP0U_zRA&feature=youtu.be
+    private void setUpBoardSizeRadioBtns() {
         RadioGroup group = (RadioGroup) findViewById(R.id.radio_group_board_size);
 
         int[] numRows = getResources().getIntArray(R.array.num_board_rows);
@@ -50,10 +49,8 @@ public class ChooseBoardSize extends AppCompatActivity {
             final int numberOfCols = numCols[i];
 
             RadioButton boardSizeBtn = new RadioButton(this);
-            final String currentDimensions = "" + numberOfRows + " rows by " + numberOfCols + " columns";
-            boardSizeBtn.setText(currentDimensions);
-            boardSizeBtn.setTextColor(Color.WHITE);
-            boardSizeBtn.setTextSize(24);
+            final String currentDimensions = ("" + numberOfRows + " rows by " + numberOfCols + " columns");
+            setRadioBtnAppearance(boardSizeBtn, currentDimensions);
 
             // on click callbacks
             boardSizeBtn.setOnClickListener(new View.OnClickListener() {
@@ -66,11 +63,16 @@ public class ChooseBoardSize extends AppCompatActivity {
             //add to radioGroup
             group.addView(boardSizeBtn);
 
-
             if(numberOfRows == getSavedRows(this)){
                 boardSizeBtn.setChecked(true);
             }
         }
+    }
+
+    private void setRadioBtnAppearance(Button button, String currentDimensions){
+        button.setText(currentDimensions);
+        button.setTextColor(Color.WHITE);
+        button.setTextSize(TEXT_SIZE);
     }
 
     private void saveNumRowsAndCols(int numRows, int numCols){
